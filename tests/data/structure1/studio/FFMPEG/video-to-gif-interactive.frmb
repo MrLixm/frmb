@@ -1,0 +1,11 @@
+{
+  "name": "convert video to .gif - interactive",
+  "icon": "",
+  "command": [
+    "cmd",
+    "/k",
+    "\"@CWD\\ffmpeg-togif.bat\"",
+    "%1",
+    "1"
+  ]
+}

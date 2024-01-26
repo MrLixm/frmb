@@ -1,0 +1,10 @@
+{
+  "name": "Open in Browser",
+  "icon": "",
+  "command": [
+    "cmd",
+    "/k",
+    "echo",
+    "\"%1\""
+  ]
+}

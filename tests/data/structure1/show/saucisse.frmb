@@ -1,0 +1,10 @@
+{
+  "name": "Show - Saucisse",
+  "icon": "",
+  "paths": [
+    "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.ma",
+    "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.mb",
+    "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.hou",
+    "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.nk"
+  ]
+}

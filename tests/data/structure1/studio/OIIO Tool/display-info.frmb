@@ -1,0 +1,12 @@
+{
+  "name": "Display info",
+  "icon": "",
+  "command": [
+    "cmd",
+    "/k",
+    "\"%%OIIOTOOL%%\"",
+    "--info",
+    "-v",
+    "\"%1\""
+  ]
+}
