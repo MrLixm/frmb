@@ -1,9 +1,37 @@
+import difflib
 import logging
 import sys
+from pathlib import Path
 
 import frmb
 
 LOGGER = logging.getLogger(__name__)
+
+
+def increment_path(path: Path) -> Path:
+    """
+    Increment a path based on version already existing on disk.
+
+    The given path must be the base path without any increment.
+
+    Can handle increment when not all the first versions exists on disk.
+    """
+    increment = 1
+
+    existing_versions = sorted(list(path.parent.glob(f"{path.stem}.????{path.suffix}")))
+    if existing_versions:
+        last_version = "".join(
+            [
+                char.lstrip("+ ")
+                for char in difflib.ndiff(str(path), str(existing_versions[-1]))
+                if char.startswith("+")
+            ]
+        )
+        last_version = last_version.strip(".")
+        increment = int(last_version) + 1
+
+    new_path = path.with_suffix(f".{increment:0>4}{path.suffix}")
+    return new_path
 
 
 def main(argv=None):
@@ -66,11 +94,11 @@ def main(argv=None):
 
     target_dir = cli.target_dir or cli.root_dir
 
-    target_reg_add = target_dir / "install.reg"
+    target_reg_add = increment_path(target_dir / "install.reg")
     LOGGER.info(f"writing {target_reg_add}")
     target_reg_add.write_text("\n".join(reg_content_add), encoding="utf-8")
 
-    target_reg_remove = target_dir / "uninstall.reg"
+    target_reg_remove = increment_path(target_dir / "uninstall.reg")
     LOGGER.info(f"writing {target_reg_remove}")
     target_reg_remove.write_text("\n".join(reg_content_remove), encoding="utf-8")
 
