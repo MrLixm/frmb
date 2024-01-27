@@ -1,6 +1,7 @@
 import dataclasses
 import json
 import logging
+import os
 import re
 from pathlib import Path
 from typing import Iterable
@@ -96,9 +97,6 @@ class FrmbFormat:
 
         icon_path = content.get("icon", None)
         icon_path = Path(_resolve(icon_path)) if icon_path else None
-        if icon_path and not icon_path.is_absolute():
-            icon_path = path.parent / icon_path
-            icon_path = icon_path.resolve()
 
         return cls(
             name=content["name"],
@@ -174,8 +172,8 @@ def validate_entry_hierarchy(
                 f"Entry {entry} is specifying both a command and children."
             )
 
-        if entry.icon and not entry.icon.is_file():
-            errors.setdefault(entry, []).append(
+        if entry.icon and os.sep in str(entry.icon) and not entry.icon.is_file():
+            warnings.setdefault(entry, []).append(
                 f"icon path doesn't exist on disk: got {entry.icon}, expected to be an existing file."
             )
 
