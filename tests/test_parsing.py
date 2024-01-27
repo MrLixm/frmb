@@ -36,7 +36,7 @@ def test__read_hierarchy_from_root__studio(data_dir):
         "1",
     )
 
-    assert len(children[1].children) == 1
+    assert len(children[1].children) == 2
     assert children[1].command != []
 
     children = hierarchy[1].children

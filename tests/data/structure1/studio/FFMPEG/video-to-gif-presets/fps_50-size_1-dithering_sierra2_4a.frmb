@@ -1,0 +1,14 @@
+{
+  "name": "convert video to .gif - fps:50 size:/2 dithering:sierra2_4a",
+  "icon": "",
+  "command": [
+    "cmd",
+    "/k",
+    "\\\"@ROOT\\FFMPEG\\ffmpeg-togif.bat\\\"",
+    "\"%1\"",
+    "0",
+    "50",
+    "1",
+    "sierra2_4a"
+  ]
+}

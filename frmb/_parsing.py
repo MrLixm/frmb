@@ -75,17 +75,22 @@ class FrmbFormat:
         )
 
     @classmethod
-    def from_file(cls, path: Path, children: list["FrmbFormat"] = None):
+    def from_file(cls, path: Path, root_dir: Path, children: list["FrmbFormat"] = None):
         """
         Get an instance from a serialized file on disk.
 
         Args:
             path: filesystem path to an existing file, expected to be in the json format.
+            root_dir: filesystem path to an existing directory, that is the root of the hierarchy.
             children:
         """
 
         def _resolve(s: str):
-            return resolve_tokens(s, cwd=str(path.parent))
+            return resolve_tokens(
+                s,
+                cwd=str(path.parent),
+                root=str(root_dir),
+            )
 
         content = json.load(path.open("r"))
 
@@ -124,7 +129,7 @@ def read_hierarchy_from_root(root_dir: Path) -> list[FrmbFormat]:
         if frmb_dir.is_dir():
             children = read_hierarchy_from_root(frmb_dir)
 
-        frmb_obj = FrmbFormat.from_file(frmb_path, children=children)
+        frmb_obj = FrmbFormat.from_file(frmb_path, root_dir=root_dir, children=children)
         output.append(frmb_obj)
 
     return output
