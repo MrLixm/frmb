@@ -30,6 +30,9 @@ def _generate_reg_from_entry(
     path_prefix = "" if add_keys else "-"
     full_path = f"{parent_path}\\shell\\{entry.identifier}"
 
+    if entry.children:
+        output += [f"; {entry.name}"]
+
     output += [
         f"[{path_prefix}{full_path}]",
         f'"MUIVerb"="{entry.name}"',
