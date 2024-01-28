@@ -44,7 +44,11 @@ def _generate_reg_from_entry(
         output += ['"subCommands"=""']
         for child in entry.children:
             output += [""]
-            output += _generate_reg_from_entry(child, parent_path=full_path)
+            output += _generate_reg_from_entry(
+                child,
+                parent_path=full_path,
+                add_keys=add_keys,
+            )
     else:
         output += [
             f"[{path_prefix}{full_path}\\command]",
