@@ -6,10 +6,10 @@ from frmb.__main__ import increment_path
 
 def test__main__errors(tmp_path, data_dir):
     structure1_dir = data_dir / "structure1"
-    structure1_studio_dir = structure1_dir / "studio"
+    structure1_show_dir = structure1_dir / "show"
 
     arguments = [
-        str(structure1_studio_dir),
+        str(structure1_show_dir),
         "--target-dir",
         str(tmp_path),
     ]

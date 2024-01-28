@@ -18,8 +18,7 @@ def test__read_hierarchy_from_root__studio(data_dir):
     assert hierarchy[0].icon == structure1_studio_dir / "ffmpeg.ico"
     assert hierarchy[0].identifier == "FFMPEG"
     assert hierarchy[1].name == "OIIO Tool"
-    icon1 = structure1_studio_dir.joinpath("oiiotool.ico").absolute()
-    assert hierarchy[1].icon == icon1
+    assert hierarchy[1].icon == Path("oiiotool.ico")
     assert hierarchy[1].paths == ("HKEY_CURRENT_USER\\Software\\Classes\\*",)
     assert hierarchy[1].identifier == "OIIO Tool"
 
@@ -28,10 +27,11 @@ def test__read_hierarchy_from_root__studio(data_dir):
 
     assert children[0].name == "convert video to .gif - interactive"
     assert children[0].icon is None
+    prepath = str(structure1_studio_dir / "FFMPEG").replace("\\", "\\\\")
     assert children[0].command == (
         "cmd",
         "/k",
-        f"\"{structure1_studio_dir / 'FFMPEG' / 'ffmpeg-togif.bat'}\"",
+        f'"{prepath}\\ffmpeg-togif.bat"',
         "%1",
         "1",
     )
@@ -49,8 +49,8 @@ def test__validate_entry_hierarchy__studio(data_dir):
 
     hierarchy = read_hierarchy_from_root(structure1_studio_dir)
     errors, warnings = validate_entry_hierarchy(hierarchy)
-    assert len(errors) == 1
-    assert len(warnings) == 1
+    assert len(errors) == 0
+    assert len(warnings) == 2
 
 
 def test__validate_entry_hierarchy__show(data_dir):

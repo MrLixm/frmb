@@ -1,6 +1,6 @@
 {
   "name": "Ffmpeg",
-  "icon": "@CWD/ffmpeg.ico",
+  "icon": "@CWD\\\\ffmpeg.ico",
   "paths": [
     "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.mov",
     "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.mp4",
