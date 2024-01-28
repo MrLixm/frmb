@@ -1,0 +1,70 @@
+site_name: Frmb - documentation
+repo_url: https://github.com/MrLixm/frmb
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  favicon: img/favicon.ico
+  palette:
+    scheme: slate
+    primary: custom
+    accent: custom
+  logo: img/logo.svg
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - search.suggest
+    - content.code.annotate
+    - content.code.copy
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/MrLixm/frmb
+      name: frmb on GitHub
+    - icon: fontawesome/brands/mastodon
+      link: https://mastodon.gamedev.place/@liamcollod
+      name: developer personal Mastodon account
+
+extra_css:
+  - extra.css
+
+plugins:
+  - search
+  - privacy
+  - mkdocstrings:
+      custom_templates: docs/templates
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            docstring_section_style: list
+            show_source: false
+            merge_init_into_class: true
+
+            inherited_members: true
+
+            heading_level: 2
+            show_root_heading: true
+            show_root_full_path: false
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+
+            separate_signature: true
+            show_signature_annotations: true
+            signature_crossrefs: true
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true

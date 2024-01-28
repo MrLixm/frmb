@@ -1,0 +1,61 @@
+:root {
+    --md-accent-fg-color: #BF79D8;
+    --md-accent-fg-color--light: #BF79D8;
+    --md-accent-fg-color--dark: #BF79D8;
+
+    --md-primary-fg-color: #BF79D8;
+    --md-primary-fg-color--light: #daa8ec;
+    --md-primary-fg-color--dark: #7b4e8c;
+
+    /* same value as default */
+    --md-code-bg-color: hsla(var(--md-hue), 15%, 18%, 1);
+    --md-tabbed-bg-color: hsla(var(--md-hue), 15%, 16%, 1)
+}
+.md-typeset {
+    font-size: 0.72rem;
+    line-height: 1.4;
+}
+.md-typeset h1, .md-typeset h1>*:not(.doc-symbol) {
+    color: var(--md-accent-fg-color);
+}
+.md-typeset h2, .md-typeset h2>*:not(.doc-symbol) {
+    font-weight: 900;
+    color: var(--md-accent-fg-color);
+}
+.md-typeset h3, .md-typeset h3>*:not(.doc-symbol) {
+    font-weight: 700;
+    color: var(--md-accent-fg-color);
+}
+.md-typeset h4, .md-typeset h4>*:not(.doc-symbol) {
+    font-weight: 700;
+    color: var(--md-accent-fg-color);
+}
+.tabbed-set > .tabbed-content {
+    background-color: var(--md-tabbed-bg-color);
+    padding: 0 15px 0 15px;
+}
+/* mkdocstrings/python */
+[data-md-color-scheme="slate"] {
+    /* mkdocstrings/python */
+    --doc-symbol-attribute-fg-color: rgba(182, 89, 128, 0.5);
+    --doc-symbol-function-fg-color: rgba(140, 135, 229, 0.5);
+    --doc-symbol-method-fg-color: rgba(141, 137, 229, 0.5);
+    --doc-symbol-class-fg-color: rgba(107, 191, 197, 0.5);
+    --doc-symbol-module-fg-color: rgba(236, 239, 185, 0.5);
+
+    --doc-symbol-attribute-bg-color: rgba(184, 63, 150, 0.05);
+    --doc-symbol-function-bg-color: rgba(109, 103, 228, 0.05);
+    --doc-symbol-method-bg-color: rgba(109, 103, 228, 0.05);
+    --doc-symbol-class-bg-color: rgba(70, 194, 203, 0.05);
+    --doc-symbol-module-bg-color: rgba(242, 247, 161, 0.05);
+}
+
+.doc-heading {
+    color: var(--md-accent-fg-color) !important;
+}
+.doc {
+    font-size: 0.98em;
+}
+.doc-signature.highlight{
+    opacity: 0.6;
+}
