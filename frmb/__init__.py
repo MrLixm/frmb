@@ -1,4 +1,4 @@
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 from ._parsing import FrmbFormat
 from ._parsing import read_hierarchy_from_root

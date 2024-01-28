@@ -89,8 +89,8 @@ class FrmbFormat:
         def _resolve(s: str):
             return resolve_tokens(
                 s,
-                cwd=str(path.parent),
-                root=str(root_dir),
+                cwd=str(path.parent).replace("\\", "\\\\"),
+                root=str(root_dir).replace("\\", "\\\\"),
             )
 
         content = json.load(path.open("r"))
