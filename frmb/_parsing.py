@@ -40,6 +40,10 @@ def resolve_tokens(source: str, **kwargs) -> str:
 
 @dataclasses.dataclass(frozen=True)
 class FrmbFormat:
+    """
+    A dataclass for the Frmb file format.
+    """
+
     name: str
     """
     Label displayed in the GUI
@@ -110,12 +114,14 @@ class FrmbFormat:
 
 def read_hierarchy_from_root(root_dir: Path) -> list[FrmbFormat]:
     """
+    Parse the given directory to build a hierarchy of Frmb objects that represent
+    the context-menu.
 
     Args:
-        root_dir: directory reprensenting teh start of the context-menu entries hierarchy.
+        root_dir: directory reprensenting the start of the context-menu entries hierarchy.
 
     Returns:
-        list of Frmb file found at this root.
+        list of Frmb files found at root.
     """
     frmb_paths = root_dir.glob("*.frmb")
     output: list[FrmbFormat] = []
@@ -135,7 +141,7 @@ def read_hierarchy_from_root(root_dir: Path) -> list[FrmbFormat]:
 
 def validate_entry_hierarchy(
     hierarchy: Iterable[FrmbFormat],
-    __child_number=0,
+    __child_number: int = 0,
 ) -> tuple[dict[FrmbFormat, list[str]], dict[FrmbFormat, list[str]]]:
     """
     Return issues the given hierarchy might have.
