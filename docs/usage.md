@@ -212,6 +212,18 @@ Assuming python is installed and frmb is available in the `PYTHONPATH`:
 python -m frmb --help
 ```
 
+```python exec="on"
+import os
+import sys
+root = os.environ["MKDOCS_CONFIG_DIR"]
+if root not in sys.path:
+  sys.path.append(root)
+  
+import frmb
+msg = frmb.CLI(["--help"]).get_help_message()
+print(f"```\n{msg}\n```")
+```
+
 with the file structure example shared in the first section :
 
 ```powershell
