@@ -9,3 +9,7 @@ update existing ones.
 `frmb` works with a simple concept where you give a directory path as input,
 and produces 2 `.reg` files as output: one for "installing" the context-menu,
 and one for "uninstalling it".
+
+![demo video of creating the context-menu](docs/img/demo.gif)
+
+> for precise replay, access [the video here](docs/img/demo.mp4)
