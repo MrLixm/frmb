@@ -44,15 +44,22 @@ def main(argv=None):
         stream=sys.stdout,
     )
 
+    root_dir = cli.root_dir.resolve()
+    target_dir = cli.target_dir or root_dir
+    target_dir = target_dir.resolve()
+
     LOGGER.info(f"starting {frmb.__name__} v{frmb.__version__}")
 
-    if not cli.root_dir.exists():
+    if not root_dir.exists():
+        raise FileNotFoundError(f"root_dir provided doesn't exist on disk: {root_dir}")
+
+    if not target_dir.exists():
         raise FileNotFoundError(
-            f"root_dir provided doesn't exist on disk: {cli.root_dir}"
+            f"target_dir provided doesn't exist on disk: {target_dir}"
         )
 
-    LOGGER.info(f"reading {cli.root_dir}")
-    hierarchy = frmb.read_hierarchy_from_root(cli.root_dir)
+    LOGGER.info(f"reading {root_dir}")
+    hierarchy = frmb.read_hierarchy_from_root(root_dir)
 
     # // validate data read from disk
 
@@ -78,7 +85,7 @@ def main(argv=None):
 
     # // generate reg file
 
-    comments = [f"generated from {cli.root_dir}"]
+    comments = [f"generated from {root_dir}"]
     reg_content_add = frmb.generate_reg_from_hierarchy(
         hierarchy,
         header_comments=comments,
@@ -91,8 +98,6 @@ def main(argv=None):
     )
 
     # // write files to disk
-
-    target_dir = cli.target_dir or cli.root_dir
 
     target_reg_add = increment_path(target_dir / "install.reg")
     LOGGER.info(f"writing {target_reg_add}")
