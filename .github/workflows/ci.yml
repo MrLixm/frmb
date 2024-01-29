@@ -1,0 +1,23 @@
+# source (modified): https://squidfunk.github.io/mkdocs-material/publishing-your-site/#with-github-actions
+name: ci
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  doc-deploy:
+    name: Build and Deploy Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'poetry'
+      - run: poetry install
+      - run: poetry run mkdocs gh-deploy --force
