@@ -2,6 +2,7 @@ import argparse
 import logging
 import sys
 from pathlib import Path
+from typing import Sequence
 
 import frmb
 
@@ -9,7 +10,16 @@ LOGGER = logging.getLogger(__name__)
 
 
 class CLI:
-    def __init__(self, argv=None):
+    """
+    "Command line interface".
+
+    Parse user arguments and retrieve their value as a more convenient python object.
+
+    Args:
+        argv: command line arguments. Default uses ``sys.argv``.
+    """
+
+    def __init__(self, argv: Sequence[str] | None = None):
         argv = argv or sys.argv[1:]
         self.parser = argparse.ArgumentParser(
             frmb.__name__,
@@ -41,16 +51,28 @@ class CLI:
 
     @property
     def root_dir(self) -> Path:
+        """
+        Filesystem path to an existing directory, root of the context-menu hierarchy.
+        """
         return Path(self.parsed.root_dir)
 
     @property
     def debug(self) -> bool:
+        """
+        True to log debug messages.
+        """
         return self.parsed.debug
 
     @property
     def target_dir(self) -> Path | None:
+        """
+        Filesystem path to an existing directory, used to create the reg files.
+        """
         return Path(self.parsed.target_dir) if self.parsed.target_dir else None
 
     @property
     def ignore_errors(self) -> bool:
+        """
+        If True, does not stop (raise) when errors are found in the hierarchy.
+        """
         return self.parsed.ignore_errors
