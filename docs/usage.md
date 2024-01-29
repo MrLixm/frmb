@@ -295,3 +295,9 @@ section.
 
     It is recommended to version-control your root directory. So you can
     track changes and revert to previous versions in case of issues.
+
+!!! tip
+
+    If your hierarchy is version-controlled on GitHub, you can add a `.gitattributes`
+    file to specify `.frmb` as being JSON for syntax highlighting: 
+    https://github.com/github-linguist/linguist/blob/master/docs/overrides.md
