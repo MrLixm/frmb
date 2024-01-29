@@ -20,7 +20,9 @@ class CLI:
     """
 
     def __init__(self, argv: Sequence[str] | None = None):
-        argv = argv or sys.argv[1:]
+        self._argv = argv or sys.argv[1:]
+        self._parsed = None
+
         self.parser = argparse.ArgumentParser(
             frmb.__name__,
             description="Convert file structures to right-click context menu for Windows.",
@@ -47,7 +49,13 @@ class CLI:
             action="store_true",
             help="Doesn't raise when errors are found. Use at your own risk.",
         )
-        self.parsed = self.parser.parse_args(argv)
+
+    @property
+    def parsed(self) -> argparse.Namespace:
+        # we defer the arg parsing as it could call sys.exit which we might not want in all cases
+        if self._parsed is None:
+            self._parsed = self.parser.parse_args(self._argv)
+        return self._parsed
 
     @property
     def root_dir(self) -> Path:
@@ -76,3 +84,9 @@ class CLI:
         If True, does not stop (raise) when errors are found in the hierarchy.
         """
         return self.parsed.ignore_errors
+
+    def get_help_message(self) -> str:
+        """
+        The message displayed when providing the ``--help`` argument.
+        """
+        return self.parser.format_help()
