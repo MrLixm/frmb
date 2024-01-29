@@ -4,6 +4,11 @@ version = "0.1.0"
 description = "Convert file structures to right-click context menu for Windows."
 authors = ["Liam Collod <monsieurlixm@gmail.com>"]
 readme = "README.md"
+repository = "https://github.com/MrLixm/frmb"
+keywords = ["context-menu", "Windows", "registry"]
+packages = [
+    { include = "frmb" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
