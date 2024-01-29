@@ -1,4 +1,3 @@
-# source (modified): https://squidfunk.github.io/mkdocs-material/publishing-your-site/#with-github-actions
 name: ci
 on:
   push:
