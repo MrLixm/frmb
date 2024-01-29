@@ -4,9 +4,6 @@ on:
   pull_request:
     paths-ignore:
       - 'docs/**'
-  push:
-    paths-ignore:
-      - 'docs/**'
 
 jobs:
   unittests:

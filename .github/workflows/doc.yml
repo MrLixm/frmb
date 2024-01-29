@@ -4,12 +4,6 @@ on:
   pull_request:
     paths-ignore:
       - 'tests/**'
-  push:
-    branches-ignore:
-      # already covered by ci.yml
-      - 'main'
-    paths-ignore:
-      - 'tests/**'
 
 jobs:
   doc-build:
