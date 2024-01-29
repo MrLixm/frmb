@@ -1,6 +1,6 @@
 import pytest
 
-from frmb.__main__ import main
+from frmb.__main__ import execute_cli
 from frmb.__main__ import increment_path
 
 
@@ -14,7 +14,7 @@ def test__main__errors(tmp_path, data_dir):
         str(tmp_path),
     ]
     with pytest.raises(RuntimeError):
-        main(argv=arguments)
+        execute_cli(argv=arguments)
 
     arguments = [
         str("I:/doesnt/exists"),
@@ -22,7 +22,7 @@ def test__main__errors(tmp_path, data_dir):
         str(tmp_path),
     ]
     with pytest.raises(FileNotFoundError):
-        main(argv=arguments)
+        execute_cli(argv=arguments)
 
 
 def test__main(tmp_path, data_dir):
@@ -35,7 +35,7 @@ def test__main(tmp_path, data_dir):
         str(tmp_path),
         "--ignore-errors",
     ]
-    main(argv=arguments)
+    execute_cli(argv=arguments)
 
     assert tmp_path.joinpath("install.0001.reg").exists()
     assert tmp_path.joinpath("uninstall.0001.reg").exists()
