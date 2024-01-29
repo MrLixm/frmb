@@ -13,3 +13,7 @@ and one for "uninstalling it".
 ![demo video of creating the context-menu](docs/img/demo.gif)
 
 > for precise replay, access [the video here](docs/img/demo.mp4)
+
+# documentation
+
+Read the full documentation here: https://MrLixm.github.io/frmb/
