@@ -2,6 +2,7 @@ import difflib
 import logging
 import sys
 from pathlib import Path
+from typing import Sequence
 
 import frmb
 
@@ -34,7 +35,13 @@ def increment_path(path: Path) -> Path:
     return new_path
 
 
-def main(argv=None):
+def execute_cli(argv: Sequence[str] | None = None):
+    """
+    Run the CLI using user-provided arguments.
+
+    Args:
+        argv: user command line arguments
+    """
     cli = frmb.CLI(argv=argv)
 
     logging.basicConfig(
@@ -109,4 +116,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    main()
+    execute_cli()
