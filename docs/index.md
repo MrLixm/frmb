@@ -3,6 +3,8 @@
 Frmb is a python library and CLI to convert file structures to right-click 
 context menu for Windows.
 
+![demo video of creating the context-menu](img/demo.gif)
+
 ## :material-palette: design
 
 frmb is a python module that take a file structure represented by a root directory
