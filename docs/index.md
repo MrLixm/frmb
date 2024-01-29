@@ -5,6 +5,8 @@ context menu for Windows.
 
 ![demo video of creating the context-menu](img/demo.gif)
 
+You can find an example of file-structure here: https://github.com/MrLixm/lxm-frmb-projects.
+
 ## :material-palette: design
 
 frmb is a python module that take a file structure represented by a root directory

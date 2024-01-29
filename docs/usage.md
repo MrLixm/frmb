@@ -47,6 +47,9 @@ Which I use with the command :
 python -m frmb ./root --target-dir ./root/.installers 
 ```
 
+The whole example can be found at https://github.com/MrLixm/lxm-frmb-projects.
+
+
 ### the `.frmb` file.
 
 Each `.frmb` file represent an individual menu in the "global" context-menu.
