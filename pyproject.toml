@@ -20,6 +20,7 @@ coverage = "7.4.*"
 mkdocs = "1.5.3"
 mkdocs-material = "9.5.*"
 mkdocstrings = { version = "0.24.*", extras = ["python"] }
+markdown-exec  = { version = "1.8.0", extras = ["ansi"] }
 
 [build-system]
 requires = ["poetry-core"]
