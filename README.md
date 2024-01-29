@@ -10,6 +10,9 @@ update existing ones.
 and produces 2 `.reg` files as output: one for "installing" the context-menu,
 and one for "uninstalling it".
 
+Note the approach is not dynamic, every modification to the file structure
+need to be "baked" again as a reg file on each update.
+
 ![demo video of creating the context-menu](docs/img/demo.gif)
 
 > for precise replay, access [the video here](docs/img/demo.mp4)

@@ -17,6 +17,9 @@ The file structure is built out of `.frmb` file (json format) with directories.
 Each frmb file represent a context menu entry and its configuration, with directories
 allowing for nested context menus entries.
 
+Note the approach is not dynamic, every modification to the file structure
+need to be "baked" again as a reg file on each update.
+
 ## :material-file-download: installation
 
 `frmb` has no dependencies, simply check the `pyproject.toml` for the minimal
