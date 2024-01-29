@@ -1,16 +1,19 @@
-name: ci
+name: doc
 
 on:
+  pull_request:
+    paths-ignore:
+      - 'tests/**'
   push:
-    branches:
-      - main
-
-permissions:
-  contents: write
+    branches-ignore:
+      # already covered by ci.yml
+      - 'main'
+    paths-ignore:
+      - 'tests/**'
 
 jobs:
-  doc-deploy:
-    name: Build and Deploy Documentation
+  doc-build:
+    name: Build Documentation
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,4 +25,4 @@ jobs:
           python-version: '3.10'
           cache: 'poetry'
       - run: poetry install
-      - run: poetry run mkdocs gh-deploy --force
+      - run: poetry run mkdocs build --verbose

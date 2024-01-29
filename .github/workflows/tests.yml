@@ -1,0 +1,28 @@
+name: tests
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+  push:
+    paths-ignore:
+      - 'docs/**'
+
+jobs:
+  unittests:
+    name: Run Unittests
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python: [ '3.10', '3.11' ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: 'poetry'
+      - run: poetry install
+      - run: poetry run pytest ./tests
