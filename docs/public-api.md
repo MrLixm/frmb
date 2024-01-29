@@ -16,3 +16,5 @@ import frmb
 
 ::: frmb.CLI
 
+::: frmb.execute_cli
+
