@@ -5,7 +5,8 @@ context menu for Windows.
 
 ![demo video of creating the context-menu](img/demo.gif)
 
-You can find an example of file-structure here: https://github.com/MrLixm/lxm-frmb-projects.
+You can find an example of file-structure here: 
+[https://github.com/MrLixm/lxm-frmb-projects](https://github.com/MrLixm/lxm-frmb-projects)
 
 ## :material-palette: design
 

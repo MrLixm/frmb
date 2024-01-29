@@ -47,7 +47,7 @@ Which I use with the command :
 python -m frmb ./root --target-dir ./root/.installers 
 ```
 
-The whole example can be found at https://github.com/MrLixm/lxm-frmb-projects.
+The whole example can be found at [https://github.com/MrLixm/lxm-frmb-projects](https://github.com/MrLixm/lxm-frmb-projects)
 
 
 ### the `.frmb` file.
