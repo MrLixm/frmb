@@ -33,6 +33,19 @@ Clone your fork locally and start working on your changes.
 Once satisfied you can open a pull-request to merge the desired branch of your
 fork, to the `main` branch of this repository.
 
+### setting up the project
+
+- `git clone` the repository (probably your fork)
+- `cd` at the repository root
+- ensure [poetry](https://python-poetry.org/) is installed on your system
+- `poetry install` to create a venv with the dependencies
+
+### running unittests
+
+```powershell
+pytest ./tests
+```
+
 ### requirements
 
 - Ensure the [Black formatter](https://black.readthedocs.io/en/stable/) is
