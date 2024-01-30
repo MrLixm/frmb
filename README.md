@@ -20,3 +20,9 @@ need to be "baked" again as a reg file on each update.
 # documentation
 
 Read the full documentation here: https://MrLixm.github.io/frmb/
+
+# licensing
+
+For licensing inquiries please contact me <monsieurlixm@gmail.com>.
+
+See also: https://en.wikipedia.org/wiki/License-free_software
