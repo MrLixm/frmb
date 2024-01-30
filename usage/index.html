@@ -1,0 +1,959 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../public-api/">
+      
+      
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.6">
+    
+    
+      
+        <title>Usage - Frmb - documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../assets/_markdown_exec_ansi.css">
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usage" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Frmb - documentation" class="md-header__button md-logo" aria-label="Frmb - documentation" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Frmb - documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Usage
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/MrLixm/frmb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Frmb - documentation" class="md-nav__button md-logo" aria-label="Frmb - documentation" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    Frmb - documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/MrLixm/frmb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution guidelines
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../public-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Public API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Usage
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Usage
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-creating-the-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. creating the file structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. creating the file structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-frmb-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      the .frmb file.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="the .frmb file.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+       tokens
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      "types"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-running-frmb" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. running frmb
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. running frmb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#as-a-command-line-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      as a command line tool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#as-a-python-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      as a python module
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-executing-the-reg-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. executing the reg files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. executing the reg files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling" class="md-nav__link">
+    <span class="md-ellipsis">
+      uninstalling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-updating-the-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. updating the file structure
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-creating-the-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. creating the file structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. creating the file structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-frmb-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      the .frmb file.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="the .frmb file.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+       tokens
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      "types"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-running-frmb" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. running frmb
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. running frmb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#as-a-command-line-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      as a command line tool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#as-a-python-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      as a python module
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-executing-the-reg-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. executing the reg files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. executing the reg files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling" class="md-nav__link">
+    <span class="md-ellipsis">
+      uninstalling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-updating-the-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. updating the file structure
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="usage">Usage</h1>
+<p>You can also check the <a href="../img/demo.mp4">demo video</a>.</p>
+<h2 id="1-creating-the-file-structure">1. creating the file structure</h2>
+<p>Start by creating a root directory anywhere on your system. You can decide
+to create one "context-menu installer" for a lot of use-cases at once, or rather
+multiple of them for each case, which would imply multiple root directories.</p>
+<p>The choice is just about convenience, or you don't bother having multiple
+<code>.reg</code> file to execute, or you want a single one for all your context-menus.</p>
+<p>In that directory start by creating a first <code>.frmb</code> file arbitrary named (
+ex: <code>action.frmb</code>).</p>
+<p>As an example, here is a definitive structure of one of my use-cases:</p>
+<div class="highlight"><pre><span></span><code>root/
+│   abcinfo.frmb
+│   ffmpeg-to-gifs.frmb
+│   ffmpeg.ico
+│
+├───.installers/
+│       install.0001.reg
+│       uninstall.0001.reg
+│
+├───abcinfo/
+│       abcinfo-verbose.frmb
+│       abcinfo.frmb
+│
+└───ffmpeg-to-gifs/
+    │   ffmpeg-togif.bat
+    │   video-to-gif-interactive.frmb
+    │   video-to-gif-presets.frmb
+    │
+    └───video-to-gif-presets/
+            togif-24fps-sd1-floyd.frmb
+            togif-50fps-sd1-sierra24a.frmb
+            ...
+</code></pre></div>
+<p>Which I use with the command :</p>
+<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">-m</span> <span class="n">frmb</span> <span class="p">./</span><span class="n">root</span> <span class="p">-</span><span class="n">-target-dir</span> <span class="p">./</span><span class="n">root</span><span class="p">/.</span><span class="n">installers</span> 
+</code></pre></div>
+<p>The whole example can be found at <a href="https://github.com/MrLixm/lxm-frmb-projects">https://github.com/MrLixm/lxm-frmb-projects</a></p>
+<h3 id="the-frmb-file">the <code>.frmb</code> file.</h3>
+<p>Each <code>.frmb</code> file represent an individual menu in the "global" context-menu.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>.frmb</code> files are just regular <code>.json</code> files with a different extension.</p>
+</div>
+<p>Its content specify how to configure the menu in the GUI.</p>
+<p><strong>The name of the file matters</strong> as it is used in the path of the registry key.
+Fortunately Windows have no limitation on that side and allows for special 
+characters.</p>
+<div class="admonition tip">
+<p class="admonition-title">Sorting Tip</p>
+<p>This behaviour allow you to sort menus in the GUI. By default 
+Windows sort them alphabetically
+where <code>display.frmb</code> would be uppermore than <code>export.frmb</code>. If you wanted the
+inverse you could instead use <code>01export.frmb</code> and <code>02display.frmb</code>.</p>
+</div>
+<p>Content of the file is bound to the <a href="https://en.wikipedia.org/wiki/JSON">json</a>
+syntax and can be structured as follows :</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;paths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="keys">keys</h4>
+<p><em>Other keys are allowed but not used.</em></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1"><code>name</code></label><label for="__tabbed_1_2"><code>icon</code></label><label for="__tabbed_1_3"><code>paths</code></label><label for="__tabbed_1_4"><code>command</code></label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Used as label in the GUI. Any kind of string with any character.</p>
+</div>
+<div class="tabbed-block">
+<p>A path to an absolute existing <code>.ico</code> file.</p>
+<p>Must use backslackes which are escaped <code>\\</code> in json.</p>
+<p>Supports:</p>
+<ul>
+<li>path to a <code>.exe</code> file (their icon will be used by Windows)</li>
+<li>environment variables like <code>%MY_VAR%</code></li>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14 3-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7v2l4-3-4-3v2H4V3h10m7 7v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2h2v2h11v-9h-5V7H8v6H6V7a2 2 0 0 1 2-2h8l5 5Z"/></svg></span> <a href="./#tokens">tokens</a></li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>List of Windows registry keys paths. The context-menu will be duplicated for
+each key path in the list.</p>
+<p>Must use backslackes which are escaped <code>\\</code> in json.</p>
+<p>Example to create a context-menu only on files with the <code>.abc</code> extension: </p>
+<div class="highlight"><pre><span></span><code><span class="err">pa</span><span class="kc">t</span><span class="err">hs</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.abc&quot;</span><span class="p">]</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>List of command line arguments executed when the menu is pressed.</p>
+<p>Support <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14 3-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7v2l4-3-4-3v2H4V3h10m7 7v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2h2v2h11v-9h-5V7H8v6H6V7a2 2 0 0 1 2-2h8l5 5Z"/></svg></span> <a href="./#tokens">tokens</a>.</p>
+<p>Example to start a terminal and echo a message:</p>
+<div class="highlight"><pre><span></span><code><span class="err">comma</span><span class="kc">n</span><span class="err">d</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cmd&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/k&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;echo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hello world&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>Be careful to <a href="https://ss64.com/nt/syntax-esc.html">properly escape anything that should be</a>.</p>
+<p>Example to start a <code>.bat</code> stored next to the <code>.frmb</code> file:</p>
+<div class="highlight"><pre><span></span><code><span class="err">comma</span><span class="kc">n</span><span class="err">d</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cmd&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/k&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;\&quot;@CWD\\\\scripts\\\\launcher.bat\&quot;&quot;</span><span class="p">]</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h4 id="tokens"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14 3-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7v2l4-3-4-3v2H4V3h10m7 7v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2h2v2h11v-9h-5V7H8v6H6V7a2 2 0 0 1 2-2h8l5 5Z"/></svg></span> tokens</h4>
+<p>Some keys can have their value including a token that is replaced when the file is read.</p>
+<p>A token is added to a string using the syntax <code>@TOKEN_NAME</code>.</p>
+<p>Example: <code>"@CWD\\file.ico"</code> could be resolved to <code>"D:\\os\\menus\\root\\file.ico"</code></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1"><code>CWD</code></label><label for="__tabbed_2_2"><code>ROOT</code></label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The parent directory of the <code>frmb</code> file (with escaped backslashes).</p>
+</div>
+<div class="tabbed-block">
+<p>The top-level directory of the context-menu hierarchy (with escaped backslashes).</p>
+</div>
+</div>
+</div>
+<p>If you need the <code>@</code> character to be interpreted literally, you can escape it
+by doubling it. </p>
+<p>Example: <code>"@CWD\\file@@ROOT.ico"</code> could be resolved to <code>"D:\\os\\menus\\root\\file@ROOT.ico"</code></p>
+<h4 id="types">"types"</h4>
+<p>You can distinguish 2 types of frmb file :</p>
+<ul>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3 2.25a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 2.25Zm5.53 2.97 3.75 3.75a.749.749 0 1 1-1.06 1.06L8.75 7.561v6.689a.75.75 0 0 1-1.5 0V7.561L4.78 10.03a.749.749 0 1 1-1.06-1.06l3.75-3.75a.749.749 0 0 1 1.06 0Z"/></svg></span> <strong><code>root files</code></strong> are located directly in the root directory.<blockquote>
+<p>they must always specify a <code>paths</code> key with at least one path.</p>
+</blockquote>
+</li>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 13H7v5h5v2H5V10h2v1h5v2M8 4v2H4V4h4m2-2H2v6h8V2m10 9v2h-4v-2h4m2-2h-8v6h8V9m-2 9v2h-4v-2h4m2-2h-8v6h8v-6Z"/></svg></span> <strong><code>nested files</code></strong> are at least one directory deep from the root directory.<blockquote>
+<p>they do <strong>not</strong> need the <code>paths</code> key.</p>
+</blockquote>
+</li>
+</ul>
+<p>Which can be further refined in 2 additional types :</p>
+<ul>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 18h7v2H4a2 2 0 0 1-2-2V6c0-1.11.89-2 2-2h6l2 2h8a2 2 0 0 1 2 2v2.17l-1.59-1.58-.41-.42V8H4v10m19-4v7c0 1.11-.89 2-2 2h-6a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h4l4 4m-2 1h-3v-3h-3v9h6v-6Z"/></svg></span> <strong><code>directory files</code></strong> have the same file name as a next-to directory.<blockquote>
+<p>they do <strong>not</strong> need a <code>command</code> key.</p>
+</blockquote>
+</li>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM153 289l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L71 337c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zm112-34 48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></svg></span> <strong><code>lowest level files</code></strong> which represent a menu that will execute a command<blockquote>
+<p>they need a <code>command</code> key else they are useless.</p>
+</blockquote>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>root/
+│<span class="w">   </span>maketx.frmb<span class="w">  </span><span class="c1"># root / lowest level</span>
+│<span class="w">   </span>ffmpeg-to-gifs.frmb<span class="w">  </span><span class="c1"># root / directory</span>
+│
+└───ffmpeg-to-gifs/
+<span class="w">    </span>│<span class="w">   </span>ffmpeg-togif.bat
+<span class="w">    </span>│<span class="w">   </span>video-to-gif-interactive.frmb<span class="w">  </span><span class="c1"># nested / lowest level</span>
+<span class="w">    </span>│<span class="w">   </span>video-to-gif-presets.frmb<span class="w">  </span><span class="c1"># nested / directory</span>
+<span class="w">    </span>│
+<span class="w">    </span>└───video-to-gif-presets/
+<span class="w">            </span>togif-24fps-sd1-floyd.frmb<span class="w">  </span><span class="c1"># nested / lowest level</span>
+<span class="w">            </span>togif-50fps-sd1-sierra24a.frmb<span class="w">  </span><span class="c1"># nested / lowest level</span>
+</code></pre></div>
+<h2 id="2-running-frmb">2. running frmb</h2>
+<p><code>frmb</code> is mainly intended to be used as CLI but could also be used as a python
+library for advanced use-cases.</p>
+<h3 id="as-a-command-line-tool">as a command line tool</h3>
+<p>Assuming python is installed and frmb is available in the <code>PYTHONPATH</code>:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>frmb<span class="w"> </span>--help
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>usage: frmb [-h] [--target-dir TARGET_DIR] [--debug] [--ignore-errors]
+            root_dir
+
+Convert file structures to right-click context menu for Windows.
+
+positional arguments:
+  root_dir              Path to an existing directory containing context-menu
+                        entries.
+
+options:
+  -h, --help            show this help message and exit
+  --target-dir TARGET_DIR
+                        Path to an existing directory where the reg file must
+                        be created. Default is root-dir.
+  --debug               Output debug logging.
+  --ignore-errors       Doesn&#39;t raise when errors are found. Use at your own
+                        risk.
+</code></pre></div>
+<p>with the file structure example shared in the first section :</p>
+<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">-m</span> <span class="n">frmb</span> <span class="p">./</span><span class="n">root</span> <span class="p">-</span><span class="n">-target-dir</span> <span class="p">./</span><span class="n">root</span><span class="p">/.</span><span class="n">installers</span> 
+</code></pre></div>
+<p>the <code>.reg</code> files will then be found in <code>./root/.installers</code></p>
+<h3 id="as-a-python-module">as a python module</h3>
+<p>Check the <a href="../public-api/">public-api</a> page for the documentation of available objects.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">frmb</span>
+
+<span class="n">root_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;D:/some/dir&quot;</span><span class="p">)</span>
+<span class="n">hierarchy</span> <span class="o">=</span> <span class="n">frmb</span><span class="o">.</span><span class="n">read_hierarchy_from_root</span><span class="p">(</span><span class="n">root_dir</span><span class="p">)</span>
+<span class="n">reg_content</span> <span class="o">=</span> <span class="n">frmb</span><span class="o">.</span><span class="n">generate_reg_from_hierarchy</span><span class="p">(</span><span class="n">hierarchy</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">reg_content</span><span class="p">))</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>At any time you can add have a look the unittests in <code>tests/</code> for an
+actual example of the python API.</p>
+</div>
+<h2 id="3-executing-the-reg-files">3. executing the reg files</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Registry manipulation can lead to data loss. It is recommended to back up
+you registry before editing it.</p>
+</div>
+<p>The script execution should produce 2 <code>.reg</code> files at the specified location.
+One "install" the context-menu by adding reg keys while the other "uninstall"
+by removing the reg keys.</p>
+<p>All the reg files are versioned and incremented on each run, based on the last 
+found version on disk. This is a safety to ensure you can fully uninstall
+a previously installed context-menu <strong>after</strong> you run frmb with the updates to 
+your hierarchy.</p>
+<h3 id="uninstalling">uninstalling</h3>
+<p>The logic here is simple, if you installed your context-menu with the <code>install.0003.reg</code>
+file, you MUST uninstall with the same version <code>uninstall.0003.reg</code>.</p>
+<p>It is up to you to keep track of which version you used to <em>install</em> (you could
+create a wrapper script or something in that style).</p>
+<h2 id="4-updating-the-file-structure">4. updating the file structure</h2>
+<p>When you already installed the context-menu but wish to fix/bring modification to it.</p>
+<p>Assuming frmb as been at least run once to produce the version <code>0001</code>, the
+overall workflow is as follows :</p>
+<pre class="mermaid"><code>graph LR
+  un["uninstall.0001.reg"];
+  up["update file structure"];
+  ru["run frmb"];
+  in["install.0002.reg"];
+  up--&gt;ru--&gt;un--&gt;in;</code></pre>
+<p>There is nothing special here, you can just edit, add or
+remove your <code>.frmb</code> files. Then call <code>frmb</code> once satisified.</p>
+<p>Make sure to respect what is mentioned in the above <a href="./#uninstalling">uninstalling</a>
+section.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It is recommended to version-control your root directory. So you can
+track changes and revert to previous versions in case of issues.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your hierarchy is version-controlled on GitHub, you can add a <code>.gitattributes</code>
+file to specify <code>.frmb</code> as being JSON for syntax highlighting: 
+https://github.com/github-linguist/linguist/blob/master/docs/overrides.md</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/MrLixm/frmb" target="_blank" rel="noopener" title="frmb on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+    <a href="https://mastodon.gamedev.place/@liamcollod" target="_blank" rel="noopener me" title="developer personal Mastodon account" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "content.code.annotate", "content.code.copy"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e1c3ead8.min.js"></script>
+      
+        <script src="../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="../assets/external/unpkg.com/mermaid@10.7.0/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
