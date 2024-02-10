@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### added
 
+- added `FrmbFile` class
+- added `read_menu_hierarchy_as_file` function
 - test for `FrmbFormat` hashing 
 - changelog visible in documentation
 
 ### changed
 
+- ! `frmb.read_hierarchy_from_root_` renamed to `frmb.read_menu_hierarchy`
+- ! `frmb.validate_entry_hierarchy` renamed to `frmb.validate_menu_hierarchy`
 - new logo, using dark variant instead of light
 
 ### fixed
