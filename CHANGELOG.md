@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - new logo, using dark variant instead of light
 
+### fixed
+
+- `@ROOT` token not having the correct value for nested menus.
+
 ## [1.0.1] - 2024-01-29
 
 ### added

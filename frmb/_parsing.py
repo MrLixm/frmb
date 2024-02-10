@@ -116,27 +116,37 @@ class FrmbFormat:
 
 
 def read_hierarchy_from_root(root_dir: Path) -> list[FrmbFormat]:
+def read_hierarchy_from_root(
+    root_dir: Path,
+    _initial_root: Path | None = None,
+) -> list[FrmbFormat]:
     """
     Parse the given directory to build a hierarchy of Frmb objects that represent
     the context-menu.
 
     Args:
         root_dir: directory reprensenting the start of the context-menu entries hierarchy.
+        _initial_root: private use to track the root dir in recursive calls.
 
     Returns:
         list of Frmb files found at root.
     """
     frmb_paths = root_dir.glob("*.frmb")
     output: list[FrmbFormat] = []
+    _initial_root = _initial_root or root_dir
 
     for frmb_path in frmb_paths:
         children = None
 
         frmb_dir = frmb_path.with_suffix("")
         if frmb_dir.is_dir():
-            children = read_hierarchy_from_root(frmb_dir)
+            children = read_hierarchy_from_root(frmb_dir, _initial_root=_initial_root)
 
-        frmb_obj = FrmbFormat.from_file(frmb_path, root_dir=root_dir, children=children)
+        frmb_obj = FrmbFormat.from_file(
+            frmb_path,
+            root_dir=_initial_root,
+            children=children,
+        )
         output.append(frmb_obj)
 
     return output
