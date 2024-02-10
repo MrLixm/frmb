@@ -17,6 +17,14 @@ theme:
     - content.code.annotate
     - content.code.copy
 
+nav:
+  - index.md
+  - usage.md
+  - public-api.md
+  - changelog.md
+  - contributing.md
+
+
 extra:
   social:
     - icon: fontawesome/brands/github
