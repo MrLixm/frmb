@@ -80,6 +80,14 @@ class FrmbFormat:
     Nested entries.
     """
 
+    enabled: bool = True
+    """
+    Set to False to specify the menu and its children is not intended to be displayed.
+    
+    Note that its children might still have the ``enabled`` attribute set to True.
+    It is up to the consumer process to determine that children have their parent disabled.
+    """
+
     def __str__(self):
         return (
             f'<{self.__class__.__name__} "{self.name}": {len(self.children)} children>'
@@ -120,6 +128,7 @@ class FrmbFormat:
             command=tuple(_resolve(arg) for arg in content.get("command", [])),
             paths=tuple(content.get("paths", [])),
             children=tuple(children or []),
+            enabled=content.get("enabled", True),
         )
 
 

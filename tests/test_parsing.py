@@ -64,6 +64,15 @@ def test__read_menu_hierarchy__studio(data_dir):
     assert len(children) == 1
 
 
+def test__read_menu_hierarchy__enabled(data_dir):
+    structure2_dir = data_dir / "structure2"
+    hierarchy = read_menu_hierarchy(structure2_dir)
+
+    assert hierarchy[0].enabled is True
+    assert hierarchy[1].enabled is False
+    assert hierarchy[1].children[0].enabled is True
+
+
 def test__validate_entry_hierarchy__studio(data_dir):
     structure1_dir = data_dir / "structure1"
     structure1_studio_dir = structure1_dir / "studio"

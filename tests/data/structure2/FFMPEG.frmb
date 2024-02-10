@@ -1,0 +1,10 @@
+{
+  "name": "Ffmpeg",
+  "icon": "@CWD\\\\ffmpeg.ico",
+  "paths": [
+    "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.mov",
+    "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.mp4",
+    "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.mkv",
+    "HKEY_CURRENT_USER\\Software\\Classes\\SystemFileAssociations\\.avi"
+  ]
+}
