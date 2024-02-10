@@ -94,3 +94,32 @@ def test__resolve_tokens():
     tokens = {"DIR": "/d/dir", "foo": "45"}
     result = resolve_tokens(source, **tokens)
     assert result == expected
+
+
+def test_FrmbFormat_hash():
+
+    hierarchy_1 = FrmbFormat("lowest", "", None, tuple(), tuple(), tuple())
+    for i in range(13):
+        path = tuple() if i < 12 else ("p",)
+        hierarchy_1 = FrmbFormat(f"{i}", f"{i}", None, tuple(), path, (hierarchy_1,))
+
+    hierarchy_2 = FrmbFormat("lowest", "", None, tuple(), tuple(), tuple())
+    for i in range(12):
+        path = tuple() if i < 11 else ("p",)
+        hierarchy_2 = FrmbFormat(f"{i}", f"{i}", None, tuple(), path, (hierarchy_2,))
+
+    hierarchy_3 = FrmbFormat("lowest", "", None, tuple(), tuple(), tuple())
+    for i in range(12):
+        path = tuple() if i < 11 else ("p",)
+        hierarchy_3 = FrmbFormat(f"{i}", f"{i}", None, tuple(), path, (hierarchy_3,))
+
+    hierarchy_4 = FrmbFormat("lowest", "", None, tuple(), tuple(), tuple())
+    for i in range(12):
+        path = tuple() if i < 11 else ("p",)
+        hierarchy_4 = FrmbFormat(
+            f"{i if i < 11 else 'babz'}", f"{i}", None, tuple(), path, (hierarchy_4,)
+        )
+
+    assert hash(hierarchy_1) != hash(hierarchy_2)
+    assert hash(hierarchy_2) == hash(hierarchy_3)
+    assert hash(hierarchy_3) != hash(hierarchy_4)
