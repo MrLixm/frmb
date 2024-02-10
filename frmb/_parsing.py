@@ -41,7 +41,10 @@ def resolve_tokens(source: str, **kwargs) -> str:
 @dataclasses.dataclass(frozen=True)
 class FrmbFormat:
     """
-    A dataclass for the Frmb file format.
+    Describe the content of the Frmb file format.
+
+    This object has no concept of a filesystem. Use [FrmbFile][frmb.FrmbFile] if you
+    wish to preserve that information.
 
     An instance is considered immutable. This allows hashing it, which could be used
     to compare if 2 hierarchies of FrmbFormat are equal.
@@ -83,7 +86,12 @@ class FrmbFormat:
         )
 
     @classmethod
-    def from_file(cls, path: Path, root_dir: Path, children: list["FrmbFormat"] = None):
+    def from_file(
+        cls,
+        path: Path,
+        root_dir: Path,
+        children: list["FrmbFormat"] = None,
+    ) -> "FrmbFormat":
         """
         Get an instance from a serialized file on disk.
 
@@ -115,41 +123,104 @@ class FrmbFormat:
         )
 
 
-def read_hierarchy_from_root(root_dir: Path) -> list[FrmbFormat]:
-def read_hierarchy_from_root(
+@dataclasses.dataclass(frozen=True)
+class FrmbFile:
+    """
+    A dataclass for a Frmb file existing on disk.
+
+    An instance is considered immutable. This allows hashing it, which could be used
+    to compare if 2 hierarchies of FrmbFormat are equal.
+    """
+
+    path: Path
+    """
+    Filesystem path to an existing .frmb file.
+    """
+
+    root_dir: Path
+    """
+    The hierarchy root directory this file was extracted from.
+    """
+
+    children: tuple["FrmbFile"]
+    """
+    Other frmb file that are children of this one in the global hierarchy.
+    """
+
+    @property
+    def content(self) -> FrmbFormat:
+        """
+        The content of the file in the Frmb format.
+        """
+        return FrmbFormat.from_file(
+            path=self.path,
+            root_dir=self.root_dir,
+            children=[file.content for file in self.children],
+        )
+
+
+def read_menu_hierarchy_as_file(
     root_dir: Path,
-    _initial_root: Path | None = None,
-) -> list[FrmbFormat]:
+    __initial_root: Path | None = None,
+) -> list[FrmbFile]:
     """
     Parse the given directory to build a hierarchy of Frmb objects that represent
     the context-menu.
 
+    Only the root object are returned, which can be parsed recursively using their
+    ``children`` attribute.
+
     Args:
-        root_dir: directory reprensenting the start of the context-menu entries hierarchy.
-        _initial_root: private use to track the root dir in recursive calls.
+        root_dir: directory representing the start of the context-menu hierarchy.
+        __initial_root: private. Used to track the root dir in recursive calls.
 
     Returns:
         list of Frmb files found at root.
     """
     frmb_paths = root_dir.glob("*.frmb")
-    output: list[FrmbFormat] = []
-    _initial_root = _initial_root or root_dir
+    output: list[FrmbFile] = []
+    __initial_root = __initial_root or root_dir
 
     for frmb_path in frmb_paths:
         children = None
 
         frmb_dir = frmb_path.with_suffix("")
         if frmb_dir.is_dir():
-            children = read_hierarchy_from_root(frmb_dir, _initial_root=_initial_root)
+            children = read_menu_hierarchy_as_file(
+                frmb_dir, __initial_root=__initial_root
+            )
 
-        frmb_obj = FrmbFormat.from_file(
-            frmb_path,
-            root_dir=_initial_root,
-            children=children,
+        frmb_obj = FrmbFile(
+            path=frmb_path,
+            root_dir=__initial_root,
+            children=tuple(children) if children else tuple(),
         )
         output.append(frmb_obj)
 
     return output
+
+
+def read_menu_hierarchy(root_dir: Path) -> list[FrmbFormat]:
+    """
+    Parse the given directory to build a hierarchy of Frmb objects that represent
+    the context-menu.
+
+    Only the root object are returned, which can be parsed recursively using their
+    ``children`` attribute.
+
+    The object returned have no concept of the original filesystem structure and
+    simply represent the context-menu structure. Use
+    [`read_menu_hierarchy_as_file`][frmb.read_menu_hierarchy_as_file]
+    if you need to preserve the filesystem structure information.
+
+    Args:
+        root_dir: directory representing the start of the context-menu hierarchy.
+
+    Returns:
+        list of Frmb file content found at root.
+    """
+    hierarchy = read_menu_hierarchy_as_file(root_dir)
+    return [file.content for file in hierarchy]
 
 
 def validate_entry_hierarchy(

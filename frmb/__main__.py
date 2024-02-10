@@ -66,7 +66,7 @@ def execute_cli(argv: Sequence[str] | None = None):
         )
 
     LOGGER.info(f"reading {root_dir}")
-    hierarchy = frmb.read_hierarchy_from_root(root_dir)
+    hierarchy: list[frmb.FrmbFormat] = frmb.read_menu_hierarchy(root_dir)
 
     # // validate data read from disk
 

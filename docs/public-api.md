@@ -6,13 +6,17 @@ Those are the available objects that can be imported from :
 import frmb
 ```
 
-::: frmb.read_hierarchy_from_root
+::: frmb.read_menu_hierarchy
+
+::: frmb.read_menu_hierarchy_as_file
 
 ::: frmb.validate_entry_hierarchy
 
 ::: frmb.generate_reg_from_hierarchy
 
 ::: frmb.FrmbFormat
+
+::: frmb.FrmbFile
 
 ::: frmb.CLI
 

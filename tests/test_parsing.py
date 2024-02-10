@@ -1,16 +1,37 @@
 from pathlib import Path
 
 from frmb._parsing import FrmbFormat
-from frmb._parsing import read_hierarchy_from_root
+from frmb._parsing import read_menu_hierarchy
+from frmb._parsing import read_menu_hierarchy_as_file
 from frmb._parsing import validate_entry_hierarchy
 from frmb._parsing import resolve_tokens
 
 
-def test__read_hierarchy_from_root__studio(data_dir):
+def test__read_menu_hierarchy_as_file__studio(data_dir):
     structure1_dir = data_dir / "structure1"
     structure1_studio_dir = structure1_dir / "studio"
 
-    hierarchy = read_hierarchy_from_root(structure1_studio_dir)
+    hierarchy = read_menu_hierarchy_as_file(structure1_studio_dir)
+    assert len(hierarchy) == 2
+
+    assert hierarchy[0].path.exists()
+    assert hierarchy[0].path.name == "FFMPEG.frmb"
+    assert hierarchy[0].root_dir == structure1_studio_dir
+    assert hierarchy[1].root_dir == structure1_studio_dir
+
+    children = hierarchy[0].children
+    assert len(children) == 2
+
+    assert children[0].path.name == "video-to-gif-interactive.frmb"
+    assert children[1].root_dir == structure1_studio_dir
+    assert len(children[1].children) == 2
+
+
+def test__read_menu_hierarchy__studio(data_dir):
+    structure1_dir = data_dir / "structure1"
+    structure1_studio_dir = structure1_dir / "studio"
+
+    hierarchy = read_menu_hierarchy(structure1_studio_dir)
     assert len(hierarchy) == 2
 
     # files should be parsed in alphabetical order
@@ -47,7 +68,7 @@ def test__validate_entry_hierarchy__studio(data_dir):
     structure1_dir = data_dir / "structure1"
     structure1_studio_dir = structure1_dir / "studio"
 
-    hierarchy = read_hierarchy_from_root(structure1_studio_dir)
+    hierarchy = read_menu_hierarchy(structure1_studio_dir)
     errors, warnings = validate_entry_hierarchy(hierarchy)
     assert len(errors) == 0
     assert len(warnings) == 2
@@ -57,7 +78,7 @@ def test__validate_entry_hierarchy__show(data_dir):
     structure1_dir = data_dir / "structure1"
     structure1_show_dir = structure1_dir / "show"
 
-    hierarchy = read_hierarchy_from_root(structure1_show_dir)
+    hierarchy = read_menu_hierarchy(structure1_show_dir)
     errors, warnings = validate_entry_hierarchy(hierarchy)
     assert len(errors) == 1
     assert len(warnings) == 0

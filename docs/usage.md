@@ -234,7 +234,7 @@ from pathlib import Path
 import frmb
 
 root_dir = Path("D:/some/dir")
-hierarchy = frmb.read_hierarchy_from_root(root_dir)
+hierarchy = frmb.read_menu_hierarchy(root_dir)
 reg_content = frmb.generate_reg_from_hierarchy(hierarchy)
 
 print("\n".join(reg_content))
