@@ -3,7 +3,7 @@ from pathlib import Path
 from frmb._parsing import FrmbFormat
 from frmb._parsing import read_menu_hierarchy
 from frmb._parsing import read_menu_hierarchy_as_file
-from frmb._parsing import validate_entry_hierarchy
+from frmb._parsing import validate_menu_hierarchy
 from frmb._parsing import resolve_tokens
 
 
@@ -69,7 +69,7 @@ def test__validate_entry_hierarchy__studio(data_dir):
     structure1_studio_dir = structure1_dir / "studio"
 
     hierarchy = read_menu_hierarchy(structure1_studio_dir)
-    errors, warnings = validate_entry_hierarchy(hierarchy)
+    errors, warnings = validate_menu_hierarchy(hierarchy)
     assert len(errors) == 0
     assert len(warnings) == 2
 
@@ -79,7 +79,7 @@ def test__validate_entry_hierarchy__show(data_dir):
     structure1_show_dir = structure1_dir / "show"
 
     hierarchy = read_menu_hierarchy(structure1_show_dir)
-    errors, warnings = validate_entry_hierarchy(hierarchy)
+    errors, warnings = validate_menu_hierarchy(hierarchy)
     assert len(errors) == 1
     assert len(warnings) == 0
 
@@ -91,7 +91,7 @@ def test__validate_entry_hierarchy_recursion(data_dir):
         p = tuple() if i < 15 else ("p",)
         hierarchy = FrmbFormat(f"{i}", f"{i}", None, tuple(), p, (hierarchy,))
 
-    errors, warnings = validate_entry_hierarchy([hierarchy])
+    errors, warnings = validate_menu_hierarchy([hierarchy])
     assert len(errors) == 1
     assert "16 nested entry" in errors[list(errors.keys())[0]][0]
     assert len(warnings) == 0

@@ -70,7 +70,7 @@ def execute_cli(argv: Sequence[str] | None = None):
 
     # // validate data read from disk
 
-    errors, warnings = frmb.validate_entry_hierarchy(hierarchy)
+    errors, warnings = frmb.validate_menu_hierarchy(hierarchy)
 
     sep = "\n  "
     warning_message = "\n".join(

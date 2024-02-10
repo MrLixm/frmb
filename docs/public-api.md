@@ -10,7 +10,7 @@ import frmb
 
 ::: frmb.read_menu_hierarchy_as_file
 
-::: frmb.validate_entry_hierarchy
+::: frmb.validate_menu_hierarchy
 
 ::: frmb.generate_reg_from_hierarchy
 

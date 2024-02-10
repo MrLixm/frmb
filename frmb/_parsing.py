@@ -223,14 +223,22 @@ def read_menu_hierarchy(root_dir: Path) -> list[FrmbFormat]:
     return [file.content for file in hierarchy]
 
 
-def validate_entry_hierarchy(
+def validate_menu_hierarchy(
     hierarchy: Iterable[FrmbFormat],
     __child_number: int = 0,
 ) -> tuple[dict[FrmbFormat, list[str]], dict[FrmbFormat, list[str]]]:
     """
-    Return issues the given hierarchy might have.
+    Return issues the given menu hierarchy might have.
 
     Recursive function.
+
+    Example of use:
+
+    ```python
+    import frmb
+    hierarchy = frmb.read_menu_hierarchy(".")
+    errors, warnings = frmb.validate_menu_hierarchy(hierarchy)
+    ```
 
     Args:
         hierarchy: a list of FrmbFormat that correspond to the root entries of a context menu.
@@ -267,7 +275,7 @@ def validate_entry_hierarchy(
                 f"icon path doesn't exist on disk: got {entry.icon}, expected to be an existing file."
             )
 
-        child_errors, child_warnings = validate_entry_hierarchy(
+        child_errors, child_warnings = validate_menu_hierarchy(
             entry.children,
             __child_number=__child_number if __child_number else 1,
         )
