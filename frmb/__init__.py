@@ -1,4 +1,4 @@
-__version__ = "1.0.2"
+__version__ = "2.0.0"
 
 from ._parsing import FrmbFormat
 from ._parsing import FrmbFile

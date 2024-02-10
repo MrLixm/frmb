@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "frmb"
-version = "1.0.2"
+version = "2.0.0"
 description = "Convert file structures to right-click context menu for Windows."
 authors = ["Liam Collod <monsieurlixm@gmail.com>"]
 readme = "README.md"
