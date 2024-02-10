@@ -42,6 +42,9 @@ def resolve_tokens(source: str, **kwargs) -> str:
 class FrmbFormat:
     """
     A dataclass for the Frmb file format.
+
+    An instance is considered immutable. This allows hashing it, which could be used
+    to compare if 2 hierarchies of FrmbFormat are equal.
     """
 
     name: str
