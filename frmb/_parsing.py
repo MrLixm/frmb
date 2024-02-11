@@ -156,6 +156,13 @@ class FrmbFile:
     Other frmb file that are children of this one in the global hierarchy.
     """
 
+    def __str__(self) -> str:
+        return (
+            f"<{self.__class__.__name__} "
+            f"path=.../{self.path.parent.name}/{self.path.name}, "
+            f"{len(self.children)}children>"
+        )
+
     @property
     def content(self) -> FrmbFormat:
         """

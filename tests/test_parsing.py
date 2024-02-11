@@ -7,6 +7,17 @@ from frmb._parsing import validate_menu_hierarchy
 from frmb._parsing import resolve_tokens
 
 
+def test_classes_str(data_dir):
+    # mostly to please coverage :)
+    structure1_dir = data_dir / "structure1"
+    structure1_studio_dir = structure1_dir / "studio"
+
+    hierarchy = read_menu_hierarchy_as_file(structure1_studio_dir)
+    assert isinstance(str(hierarchy[0]), str)
+    hierarchy = read_menu_hierarchy(structure1_studio_dir)
+    assert isinstance(str(hierarchy[0]), str)
+
+
 def test__read_menu_hierarchy_as_file__studio(data_dir):
     structure1_dir = data_dir / "structure1"
     structure1_studio_dir = structure1_dir / "studio"
