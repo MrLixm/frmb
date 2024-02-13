@@ -9,7 +9,7 @@ from typing import Iterable
 LOGGER = logging.getLogger(__name__)
 
 
-def resolve_tokens(source: str, **kwargs) -> str:
+def _resolve_tokens(source: str, **kwargs) -> str:
     """
     Replace all tokens in the given string with their intended value.
 
@@ -36,6 +36,42 @@ def resolve_tokens(source: str, **kwargs) -> str:
 
     resolved = resolved.replace("%%TMP%%", "@")
     return resolved
+
+
+@dataclasses.dataclass()
+class FrmbTokenResolver:
+    """
+    List all the tokens that can be found in a Frmb file and allow to resolve them in any string.
+    """
+
+    CWD: str
+    """
+    The parent directory of the `frmb` file (with escaped backslashes).
+    """
+
+    ROOT: str
+    """
+    The top-level directory of the context-menu hierarchy (with escaped backslashes).
+    """
+
+    def resolve(self, source: str) -> str:
+        """
+        Replace all tokens in the given string with their intended value.
+
+        tokens starts with a ``@`` and are followed by the token name. Example: ``@FILE``.
+
+        Args:
+            source: a string that might contain tokens
+
+        Returns:
+            source string with token replaced
+        """
+
+        kwargs = {}
+        for item_name, item_value in vars(self).items():
+            kwargs[item_name] = str(item_value)
+
+        return _resolve_tokens(source, **kwargs)
 
 
 @dataclasses.dataclass(frozen=True)
@@ -109,23 +145,21 @@ class FrmbFormat:
             children:
         """
 
-        def _resolve(s: str):
-            return resolve_tokens(
-                s,
-                cwd=str(path.parent).replace("\\", "\\\\"),
-                root=str(root_dir).replace("\\", "\\\\"),
-            )
+        resolver = FrmbTokenResolver(
+            CWD=str(path.parent).replace("\\", "\\\\"),
+            ROOT=str(root_dir).replace("\\", "\\\\"),
+        )
 
         content = json.load(path.open("r"))
 
         icon_path = content.get("icon", None)
-        icon_path = Path(_resolve(icon_path)) if icon_path else None
+        icon_path = Path(resolver.resolve(icon_path)) if icon_path else None
 
         return cls(
             name=content["name"],
             identifier=path.stem,
             icon=icon_path,
-            command=tuple(_resolve(arg) for arg in content.get("command", [])),
+            command=tuple(resolver.resolve(arg) for arg in content.get("command", [])),
             paths=tuple(content.get("paths", [])),
             children=tuple(children or []),
             enabled=content.get("enabled", True),
