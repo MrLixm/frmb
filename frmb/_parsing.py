@@ -133,7 +133,6 @@ class FrmbFormat:
     def from_file(
         cls,
         path: Path,
-        root_dir: Path,
         children: list["FrmbFormat"] = None,
     ) -> "FrmbFormat":
         """
@@ -141,25 +140,19 @@ class FrmbFormat:
 
         Args:
             path: filesystem path to an existing file, expected to be in the json format.
-            root_dir: filesystem path to an existing directory, that is the root of the hierarchy.
-            children:
+            children: child instance the new instanc emust be parent of
         """
-
-        resolver = FrmbTokenResolver(
-            CWD=str(path.parent).replace("\\", "\\\\"),
-            ROOT=str(root_dir).replace("\\", "\\\\"),
-        )
 
         content = json.load(path.open("r"))
 
         icon_path = content.get("icon", None)
-        icon_path = Path(resolver.resolve(icon_path)) if icon_path else None
+        icon_path = Path(icon_path) if icon_path else None
 
         return cls(
             name=content["name"],
             identifier=path.stem,
             icon=icon_path,
-            command=tuple(resolver.resolve(arg) for arg in content.get("command", [])),
+            command=tuple(content.get("command", [])),
             paths=tuple(content.get("paths", [])),
             children=tuple(children or []),
             enabled=content.get("enabled", True),
@@ -197,16 +190,35 @@ class FrmbFile:
             f"{len(self.children)}children>"
         )
 
-    @property
-    def content(self) -> FrmbFormat:
+    def content(self, resolve_tokens: bool = True) -> FrmbFormat:
         """
         The content of the file in the Frmb format.
         """
-        return FrmbFormat.from_file(
+        instance = FrmbFormat.from_file(
             path=self.path,
-            root_dir=self.root_dir,
-            children=[file.content for file in self.children],
+            children=[
+                file.content(resolve_tokens=resolve_tokens) for file in self.children
+            ],
         )
+
+        if resolve_tokens:
+            resolver = FrmbTokenResolver(
+                CWD=str(self.path.parent).replace("\\", "\\\\"),
+                ROOT=str(self.root_dir).replace("\\", "\\\\"),
+            )
+
+            new_icon = resolver.resolve(str(instance.icon)) if instance.icon else None
+            new_icon = Path(new_icon) if new_icon else None
+
+            new_command = tuple(resolver.resolve(arg) for arg in instance.command)
+
+            instance = dataclasses.replace(
+                instance,
+                icon=new_icon,
+                command=new_command,
+            )
+
+        return instance
 
 
 def read_menu_hierarchy_as_file(
@@ -250,7 +262,10 @@ def read_menu_hierarchy_as_file(
     return output
 
 
-def read_menu_hierarchy(root_dir: Path) -> list[FrmbFormat]:
+def read_menu_hierarchy(
+    root_dir: Path,
+    resolve_tokens: bool = True,
+) -> list[FrmbFormat]:
     """
     Parse the given directory to build a hierarchy of Frmb objects that represent
     the context-menu.
@@ -265,12 +280,13 @@ def read_menu_hierarchy(root_dir: Path) -> list[FrmbFormat]:
 
     Args:
         root_dir: directory representing the start of the context-menu hierarchy.
+        resolve_tokens: False to not resolve tokens in some strings attributes.
 
     Returns:
         list of Frmb file content found at root.
     """
     hierarchy = read_menu_hierarchy_as_file(root_dir)
-    return [file.content for file in hierarchy]
+    return [file.content(resolve_tokens=resolve_tokens) for file in hierarchy]
 
 
 def validate_menu_hierarchy(
