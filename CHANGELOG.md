@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ! `frmb.read_hierarchy_from_root_` renamed to `frmb.read_menu_hierarchy`
 - ! `frmb.validate_entry_hierarchy` renamed to `frmb.validate_menu_hierarchy`
+- ! `FrmbFormat` class renamed to `FrmbMenuItem`
 - new logo, using dark variant instead of light
 - move token resolving higher up in the logic stack (on FrmbFile)
 

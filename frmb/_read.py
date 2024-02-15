@@ -11,7 +11,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 @dataclasses.dataclass(frozen=True)
-class FrmbFormat:
+class FrmbMenuItem:
     """
     Describe the content of the Frmb file format.
 
@@ -47,7 +47,7 @@ class FrmbFormat:
     Only for root entries. Registry paths that must have this entry.
     """
 
-    children: tuple["FrmbFormat"]
+    children: tuple["FrmbMenuItem"]
     """
     Nested entries.
     """
@@ -69,8 +69,8 @@ class FrmbFormat:
     def from_file(
         cls,
         path: Path,
-        children: list["FrmbFormat"] = None,
-    ) -> "FrmbFormat":
+        children: list["FrmbMenuItem"] = None,
+    ) -> "FrmbMenuItem":
         """
         Get an instance from a serialized file on disk.
 
@@ -156,11 +156,11 @@ class FrmbFile:
             f"{len(self.children)}children>"
         )
 
-    def content(self, resolve_tokens: bool = True) -> FrmbFormat:
+    def content(self, resolve_tokens: bool = True) -> FrmbMenuItem:
         """
         The content of the file in the Frmb format.
         """
-        instance = FrmbFormat.from_file(
+        instance = FrmbMenuItem.from_file(
             path=self.path,
             children=[
                 file.content(resolve_tokens=resolve_tokens) for file in self.children
@@ -231,7 +231,7 @@ def read_menu_hierarchy_as_file(
 def read_menu_hierarchy(
     root_dir: Path,
     resolve_tokens: bool = True,
-) -> list[FrmbFormat]:
+) -> list[FrmbMenuItem]:
     """
     Parse the given directory to build a hierarchy of Frmb objects that represent
     the context-menu.
@@ -256,9 +256,9 @@ def read_menu_hierarchy(
 
 
 def validate_menu_hierarchy(
-    hierarchy: Iterable[FrmbFormat],
+    hierarchy: Iterable[FrmbMenuItem],
     __child_number: int = 0,
-) -> tuple[dict[FrmbFormat, list[str]], dict[FrmbFormat, list[str]]]:
+) -> tuple[dict[FrmbMenuItem, list[str]], dict[FrmbMenuItem, list[str]]]:
     """
     Return issues the given menu hierarchy might have.
 

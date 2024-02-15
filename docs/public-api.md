@@ -14,7 +14,7 @@ import frmb
 
 ::: frmb.generate_reg_from_hierarchy
 
-::: frmb.FrmbFormat
+::: frmb.FrmbMenuItem
 
 ::: frmb.FrmbFile
 

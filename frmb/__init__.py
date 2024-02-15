@@ -1,6 +1,6 @@
 __version__ = "2.0.0"
 
-from ._read import FrmbFormat
+from ._read import FrmbMenuItem
 from ._read import FrmbFile
 from ._read import read_menu_hierarchy_as_file
 from ._read import read_menu_hierarchy
@@ -10,7 +10,7 @@ from ._cli import CLI
 from .__main__ import execute_cli
 
 __all__ = [
-    "FrmbFormat",
+    "FrmbMenuItem",
     "FrmbFile",
     "read_menu_hierarchy_as_file",
     "read_menu_hierarchy",

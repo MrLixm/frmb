@@ -17,7 +17,7 @@ def escape_windows_command(command: Iterable[str]) -> str:
 
 
 def _generate_reg_from_entry(
-    entry: frmb.FrmbFormat,
+    entry: frmb.FrmbMenuItem,
     parent_path: str,
     add_keys: bool = True,
 ) -> list[str]:
@@ -59,7 +59,7 @@ def _generate_reg_from_entry(
 
 
 def generate_reg_from_hierarchy(
-    hierachy: list[frmb.FrmbFormat],
+    hierachy: list[frmb.FrmbMenuItem],
     header_comments: list[str] | None = None,
     add_keys: bool = True,
 ) -> list[str]:
