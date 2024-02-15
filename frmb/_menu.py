@@ -61,35 +61,6 @@ class FrmbMenuItem:
             f'<{self.__class__.__name__} "{self.name}": {len(self.children)} children>'
         )
 
-    @classmethod
-    def from_file(
-        cls,
-        path: Path,
-        children: list["FrmbMenuItem"] = None,
-    ) -> "FrmbMenuItem":
-        """
-        Get an instance from a serialized file on disk.
-
-        Args:
-            path: filesystem path to an existing file, expected to be in the json format.
-            children: child instance the new instanc emust be parent of
-        """
-
-        content = json.load(path.open("r"))
-
-        icon_path = content.get("icon", None)
-        icon_path = Path(icon_path) if icon_path else None
-
-        return cls(
-            name=content["name"],
-            identifier=path.stem,
-            icon=icon_path,
-            command=tuple(content.get("command", [])),
-            paths=tuple(content.get("paths", [])),
-            children=tuple(children or []),
-            enabled=content.get("enabled", True),
-        )
-
     def to_file(self, directory: Path, write_children: bool = True):
         """
         Serialize this instance to disk.
