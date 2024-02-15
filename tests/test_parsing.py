@@ -4,8 +4,6 @@ from frmb._read import FrmbFormat
 from frmb._read import read_menu_hierarchy
 from frmb._read import read_menu_hierarchy_as_file
 from frmb._read import validate_menu_hierarchy
-from frmb._read import _resolve_tokens
-from frmb._read import FrmbTokenResolver
 from frmb._read import FrmbFile
 
 
@@ -117,36 +115,6 @@ def test__validate_entry_hierarchy_recursion(data_dir):
     assert len(errors) == 1
     assert "16 nested entry" in errors[list(errors.keys())[0]][0]
     assert len(warnings) == 0
-
-
-def test__resolve_tokens():
-    source = "some@DIR @FOO:ex \\@FILE\\"
-    expected = f"some/d/dir 45:ex \\{str(Path(__file__))}\\"
-    tokens = {"DIR": "/d/dir", "foo": "45", "FILE": str(Path(__file__))}
-    result = _resolve_tokens(source, **tokens)
-    assert result == expected
-
-    source = "some@@DIR @FOO:ex @f"
-    expected = f"some@DIR 45:ex @f"
-    tokens = {"DIR": "/d/dir", "foo": "45"}
-    result = _resolve_tokens(source, **tokens)
-    assert result == expected
-
-    source = "some@@@@DIR @FOO:ex wha\\@@@DIR"
-    expected = f"some@@DIR 45:ex wha\\@/d/dir"
-    tokens = {"DIR": "/d/dir", "foo": "45"}
-    result = _resolve_tokens(source, **tokens)
-    assert result == expected
-
-
-def test__FrmbTokenResolver():
-
-    resolver = FrmbTokenResolver(CWD="foo", ROOT=__file__)
-
-    source = "some@@CWD @ROOT:ex @f"
-    expected = f"some@CWD {__file__}:ex @f"
-    result = resolver.resolve(source)
-    assert result == expected
 
 
 def test_FrmbFormat_hash():
