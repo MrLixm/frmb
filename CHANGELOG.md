@@ -27,7 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (internal)
 - `_parsing.py` renamed to `_reading.py`
-- create `_tokens.py`
+- create `_tokens.py` to move `FrmbTokenResolver`
+- create `_menu.py`  to move `FrmbMenuItem`
 
 ### fixed
 

@@ -1,6 +1,6 @@
 __version__ = "2.0.0"
 
-from ._read import FrmbMenuItem
+from ._menu import FrmbMenuItem
 from ._read import FrmbFile
 from ._read import read_menu_hierarchy_as_file
 from ._read import read_menu_hierarchy
