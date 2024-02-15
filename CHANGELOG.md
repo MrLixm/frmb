@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ! `frmb.validate_entry_hierarchy` renamed to `frmb.validate_menu_hierarchy`
 - new logo, using dark variant instead of light
 
+(internal)
+- `_parsing.py` renamed to `_reading.py`
+
 ### fixed
 
 - `@ROOT` token not having the correct value for nested menus.

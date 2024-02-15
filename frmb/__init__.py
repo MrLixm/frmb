@@ -1,10 +1,10 @@
 __version__ = "2.0.0"
 
-from ._parsing import FrmbFormat
-from ._parsing import FrmbFile
-from ._parsing import read_menu_hierarchy_as_file
-from ._parsing import read_menu_hierarchy
-from ._parsing import validate_menu_hierarchy
+from ._read import FrmbFormat
+from ._read import FrmbFile
+from ._read import read_menu_hierarchy_as_file
+from ._read import read_menu_hierarchy
+from ._read import validate_menu_hierarchy
 from ._windows import generate_reg_from_hierarchy
 from ._cli import CLI
 from .__main__ import execute_cli

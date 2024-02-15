@@ -1,11 +1,12 @@
 from pathlib import Path
 
-from frmb._parsing import FrmbFormat
-from frmb._parsing import read_menu_hierarchy
-from frmb._parsing import read_menu_hierarchy_as_file
-from frmb._parsing import validate_menu_hierarchy
-from frmb._parsing import _resolve_tokens
-from frmb._parsing import FrmbTokenResolver
+from frmb._read import FrmbFormat
+from frmb._read import read_menu_hierarchy
+from frmb._read import read_menu_hierarchy_as_file
+from frmb._read import validate_menu_hierarchy
+from frmb._read import _resolve_tokens
+from frmb._read import FrmbTokenResolver
+from frmb._read import FrmbFile
 
 
 def test_classes_str(data_dir):
