@@ -60,33 +60,3 @@ class FrmbMenuItem:
         return (
             f'<{self.__class__.__name__} "{self.name}": {len(self.children)} children>'
         )
-
-    def to_file(self, directory: Path, write_children: bool = True):
-        """
-        Serialize this instance to disk.
-
-        If the file already exists its content is overwritten.
-
-        Args:
-            directory: filesystem path to an existing directory
-            write_children: True to also write all its childre to disk
-        """
-        content = {
-            "name": self.name,
-            "command": self.command,
-            "paths": self.paths,
-            "enabled": self.enabled,
-        }
-        if self.icon:
-            content["icon"] = str(self.icon)
-
-        dst_path = directory / (self.identifier + ".frmb")
-        json.dump(content, dst_path.open("w"), indent=4)
-
-        if not write_children:
-            return
-
-        for child in self.children:
-            child_dir = directory / self.identifier
-            child_dir.mkdir(exist_ok=True)
-            child.to_file(directory=child_dir)
