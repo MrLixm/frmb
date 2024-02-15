@@ -1,0 +1,11 @@
+{
+  "name": "Resizing",
+  "icon": "@ROOT/oiiotool.ico",
+  "command": [
+    "cmd",
+    "/k",
+    "\"%%OIIOTOOL%%\"",
+    "-resize",
+    "\"%1\""
+  ]
+}

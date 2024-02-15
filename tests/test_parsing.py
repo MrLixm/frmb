@@ -169,3 +169,31 @@ def test_FrmbFormat_tofile(data_dir, tmp_path):
     hierarchy_dst = read_menu_hierarchy(dst_path)
     assert hierarchy_dst != hierarchy_src
     assert not any([path.is_dir() for path in dst_path.glob("*")])
+
+
+def test__FrmbFile_1(data_dir):
+    src_dir = data_dir / "structure2"
+    src_path = src_dir / "FFMPEG.frmb"
+
+    instance = FrmbFile(path=src_path, root_dir=src_dir, children=tuple())
+    assert instance.path == src_path
+    assert instance.root_dir == src_dir
+    content = instance.content(resolve_tokens=True)
+    assert content.icon == src_dir / "ffmpeg.ico"
+
+    content = instance.content(resolve_tokens=False)
+    assert content.icon == Path("@CWD") / "ffmpeg.ico"
+
+
+def test__FrmbFile_2(data_dir):
+    src_dir = data_dir / "structure2"
+    src_path = src_dir / "OIIO Tool" / "resize.frmb"
+
+    instance = FrmbFile(path=src_path, root_dir=src_dir, children=tuple())
+    assert instance.path == src_path
+    assert instance.root_dir == src_dir
+    content = instance.content(resolve_tokens=True)
+    assert content.icon == src_dir / "oiiotool.ico"
+
+    content = instance.content(resolve_tokens=False)
+    assert content.icon == Path("@ROOT") / "oiiotool.ico"
