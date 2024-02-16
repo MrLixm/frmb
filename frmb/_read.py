@@ -3,6 +3,7 @@ import json
 import logging
 import os
 from pathlib import Path
+from typing import ClassVar
 from typing import Iterable
 
 from ._menu import FrmbMenuItem
@@ -30,9 +31,9 @@ class FrmbFile:
     The hierarchy root directory this file was extracted from.
     """
 
-    children: tuple["FrmbFile"]
+    file_extension: ClassVar[str] = ".frmb"
     """
-    Other frmb file that are children of this one in the global hierarchy.
+    the file extension with the dot used for storing FrmbFile on disk.
     """
 
     def __str__(self) -> str:
@@ -41,6 +42,28 @@ class FrmbFile:
             f"path=.../{self.path.parent.name}/{self.path.name}, "
             f"{len(self.children)}children>"
         )
+
+    @property
+    def children_dir(self) -> Path:
+        """
+        Filesystem path to a directory that may not exist yet.
+
+        The directory might exist but be empty, or filled with non-frmb files.
+        """
+        return self.path.with_suffix("")
+
+    @property
+    def children(self) -> list["FrmbFile"]:
+        """
+        Other frmb file that are children of this one in the global hierarchy.
+        """
+        if not self.children_dir.is_dir():
+            return []
+
+        return [
+            FrmbFile(path=child_path, root_dir=self.root_dir)
+            for child_path in self.children_dir.glob(f"*{self.file_extension}")
+        ]
 
     def at_root(self) -> bool:
         """
@@ -109,7 +132,6 @@ def read_menu_item_from_file(
 
 def read_menu_hierarchy_as_file(
     root_dir: Path,
-    __initial_root: Path | None = None,
 ) -> list[FrmbFile]:
     """
     Parse the given directory to build a hierarchy of Frmb objects that represent
@@ -120,32 +142,12 @@ def read_menu_hierarchy_as_file(
 
     Args:
         root_dir: directory representing the start of the context-menu hierarchy.
-        __initial_root: private. Used to track the root dir in recursive calls.
 
     Returns:
         list of Frmb files found at root.
     """
     frmb_paths = root_dir.glob("*.frmb")
-    output: list[FrmbFile] = []
-    __initial_root = __initial_root or root_dir
-
-    for frmb_path in frmb_paths:
-        children = None
-
-        frmb_dir = frmb_path.with_suffix("")
-        if frmb_dir.is_dir():
-            children = read_menu_hierarchy_as_file(
-                frmb_dir, __initial_root=__initial_root
-            )
-
-        frmb_obj = FrmbFile(
-            path=frmb_path,
-            root_dir=__initial_root,
-            children=tuple(children) if children else tuple(),
-        )
-        output.append(frmb_obj)
-
-    return output
+    return [FrmbFile(path=file_path, root_dir=root_dir) for file_path in frmb_paths]
 
 
 def read_menu_hierarchy(
