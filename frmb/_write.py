@@ -1,7 +1,9 @@
 import json
 import logging
+import shutil
 from pathlib import Path
 
+from . import FrmbFile
 from ._menu import FrmbMenuItem
 
 LOGGER = logging.getLogger(__name__)
@@ -46,3 +48,54 @@ def write_menu_item_to_file(
         write_menu_item_to_file(menu_item=child, directory=child_dir)
 
     return dst_path
+
+
+def delete_menu_file(
+    menu_file: FrmbFile,
+    remove_children: bool = True,
+    remove_children_dir: bool = False,
+    dry_run: bool = False,
+) -> list[Path]:
+    """
+    Delete the given menu from disk.
+
+    Args:
+        menu_file: the menu to delete from disk.
+        remove_children:
+            True to recursively delete all children too.
+        remove_children_dir:
+            Only used when ``remove_children=True``.
+            If True the whole file tree hosting children will be deleted, including
+            non-frmb related files.
+        dry_run:
+            If True, no file will be deleted but those which should have been are
+            still in the function return.
+
+    Returns:
+        list of filesystem path deleted from disk
+    """
+    deleted: list[Path] = []
+    LOGGER.debug(f"[delete_menu_file] deleting {menu_file}")
+    if not dry_run:
+        menu_file.path.unlink()
+    deleted.append(menu_file.path)
+
+    if not remove_children:
+        return deleted
+
+    for child in menu_file.children:
+        deleted += delete_menu_file(
+            child,
+            remove_children=remove_children,
+            remove_children_dir=remove_children_dir,
+            dry_run=dry_run,
+        )
+
+    if remove_children_dir and menu_file.children_dir.is_dir():
+        LOGGER.debug(f"[delete_menu_file] deleting {menu_file.children_dir}")
+        if not dry_run:
+            shutil.rmtree(menu_file.children_dir)
+        deleted.append(menu_file.children_dir)
+
+    return deleted
+

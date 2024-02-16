@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - added `enabled` attribute to `FrmbFormat`
 - add `FrmbTokenResolver` class to centralize all tokens available
 - add `FrmbFormat.to_file()` which does the invert of `from_file()`
+- add `delete_menu_file()`
 - test for `FrmbFormat` hashing 
 - changelog visible in documentation
 

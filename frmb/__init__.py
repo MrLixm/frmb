@@ -6,6 +6,7 @@ from ._read import read_menu_hierarchy_as_file
 from ._read import read_menu_hierarchy
 from ._read import validate_menu_hierarchy
 from ._write import write_menu_item_to_file
+from ._write import delete_menu_file
 from ._windows import generate_reg_from_hierarchy
 from ._cli import CLI
 from .__main__ import execute_cli
