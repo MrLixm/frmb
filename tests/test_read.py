@@ -153,6 +153,7 @@ def test__FrmbFile_1(data_dir):
     instance = FrmbFile(path=src_path, root_dir=src_dir, children=tuple())
     assert instance.path == src_path
     assert instance.root_dir == src_dir
+    assert instance.at_root()
     content = instance.content(resolve_tokens=True)
     assert content.icon == src_dir / "ffmpeg.ico"
 
@@ -167,6 +168,7 @@ def test__FrmbFile_2(data_dir):
     instance = FrmbFile(path=src_path, root_dir=src_dir, children=tuple())
     assert instance.path == src_path
     assert instance.root_dir == src_dir
+    assert not instance.at_root()
     content = instance.content(resolve_tokens=True)
     assert content.icon == src_dir / "oiiotool.ico"
 

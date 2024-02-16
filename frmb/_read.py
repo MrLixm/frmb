@@ -42,6 +42,12 @@ class FrmbFile:
             f"{len(self.children)}children>"
         )
 
+    def at_root(self) -> bool:
+        """
+        Return True if this file is located at the root of the hierarchy.
+        """
+        return self.path.parent == self.root_dir
+
     def content(self, resolve_tokens: bool = True) -> FrmbMenuItem:
         """
         The content of the file in the Frmb format.
