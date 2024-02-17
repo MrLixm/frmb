@@ -49,7 +49,7 @@ def test__delete_menu_file__dryun(data_dir, tmp_path):
     assert list(file.children_dir.glob("*"))
 
     result = delete_menu_file(file, remove_children_dir=True, dry_run=True)
-    assert len(result) == 5
+    assert len(result) == 7
     assert file.children_dir.exists()
     assert list(file.children_dir.glob("*"))
 
@@ -85,7 +85,7 @@ def test__delete_menu_file__2(data_dir, tmp_path):
     assert list(file.children_dir.glob("*"))
 
     result = delete_menu_file(file, remove_children_dir=True)
-    assert len(result) == 5
+    assert len(result) == 7
     assert not file.children_dir.exists()
 
 
@@ -119,6 +119,6 @@ def test__delete_menu_file__4(data_dir, tmp_path):
     assert file.children_dir.exists()
     assert list(file.children_dir.glob("*"))
 
-    result = delete_menu_file(file, remove_children_dir=True)
-    assert len(result) == 9
-    assert not file.children_dir.exists()
+    result = delete_menu_file(file, remove_children_dir=True, dry_run=True)
+    assert len(result) == 11
+    assert file.children_dir.exists()

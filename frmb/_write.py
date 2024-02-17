@@ -72,31 +72,34 @@ def delete_menu_file(
             still in the function return.
 
     Returns:
-        list of filesystem path deleted from disk
+        list of filesystem path deleted from disk with no duplicates
     """
-    deleted: list[Path] = []
+    deleted: set[Path] = set()
     if not dry_run:
         LOGGER.debug(f"[delete_menu_file] deleting {menu_file}")
         menu_file.path.unlink()
-    deleted.append(menu_file.path)
+    deleted.add(menu_file.path)
 
     if not remove_children:
-        return deleted
+        return list(deleted)
 
     for child in menu_file.children:
-        deleted += delete_menu_file(
-            child,
-            remove_children=remove_children,
-            remove_children_dir=remove_children_dir,
-            dry_run=dry_run,
+        deleted.update(
+            delete_menu_file(
+                child,
+                remove_children=remove_children,
+                remove_children_dir=remove_children_dir,
+                dry_run=dry_run,
+            )
         )
 
     if remove_children_dir and menu_file.children_dir.is_dir():
-        deleted += list(menu_file.children_dir.rglob("**"))
-        deleted.append(menu_file.children_dir)
+        deleted.update(list(menu_file.children_dir.rglob("*")))
+        deleted.add(menu_file.children_dir)
         if not dry_run:
             LOGGER.debug(f"[delete_menu_file] deleting {menu_file.children_dir}")
             shutil.rmtree(menu_file.children_dir)
 
-    return deleted
+    return list(deleted)
+
 
