@@ -75,8 +75,8 @@ def delete_menu_file(
         list of filesystem path deleted from disk
     """
     deleted: list[Path] = []
-    LOGGER.debug(f"[delete_menu_file] deleting {menu_file}")
     if not dry_run:
+        LOGGER.debug(f"[delete_menu_file] deleting {menu_file}")
         menu_file.path.unlink()
     deleted.append(menu_file.path)
 
@@ -92,8 +92,8 @@ def delete_menu_file(
         )
 
     if remove_children_dir and menu_file.children_dir.is_dir():
-        LOGGER.debug(f"[delete_menu_file] deleting {menu_file.children_dir}")
         if not dry_run:
+            LOGGER.debug(f"[delete_menu_file] deleting {menu_file.children_dir}")
             shutil.rmtree(menu_file.children_dir)
         deleted.append(menu_file.children_dir)
 
