@@ -49,7 +49,7 @@ def test__delete_menu_file__dryun(data_dir, tmp_path):
     assert list(file.children_dir.glob("*"))
 
     result = delete_menu_file(file, remove_children_dir=True, dry_run=True)
-    assert len(result) == 4
+    assert len(result) == 5
     assert file.children_dir.exists()
     assert list(file.children_dir.glob("*"))
 
@@ -85,7 +85,7 @@ def test__delete_menu_file__2(data_dir, tmp_path):
     assert list(file.children_dir.glob("*"))
 
     result = delete_menu_file(file, remove_children_dir=True)
-    assert len(result) == 4
+    assert len(result) == 5
     assert not file.children_dir.exists()
 
 
@@ -105,3 +105,20 @@ def test__delete_menu_file__3(data_dir, tmp_path):
     assert len(result) == 1
     assert file.children_dir.exists()
     assert list(file.children_dir.glob("*"))
+
+
+def test__delete_menu_file__4(data_dir, tmp_path):
+    # ensure to_file use the same logic as from_file
+    src_dir = data_dir / "structure1" / "studio"
+    new_dir = tmp_path / "hierarchy"
+    shutil.copytree(src_dir, new_dir)
+    hierarchy_src = read_menu_hierarchy_as_file(new_dir)
+    # ffmpeg.frmb
+    file = hierarchy_src[0]
+    assert file.path.name == "FFMPEG.frmb"
+    assert file.children_dir.exists()
+    assert list(file.children_dir.glob("*"))
+
+    result = delete_menu_file(file, remove_children_dir=True)
+    assert len(result) == 9
+    assert not file.children_dir.exists()

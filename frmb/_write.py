@@ -92,10 +92,11 @@ def delete_menu_file(
         )
 
     if remove_children_dir and menu_file.children_dir.is_dir():
+        deleted += list(menu_file.children_dir.rglob("**"))
+        deleted.append(menu_file.children_dir)
         if not dry_run:
             LOGGER.debug(f"[delete_menu_file] deleting {menu_file.children_dir}")
             shutil.rmtree(menu_file.children_dir)
-        deleted.append(menu_file.children_dir)
 
     return deleted
 
