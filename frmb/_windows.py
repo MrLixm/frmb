@@ -2,6 +2,7 @@ import logging
 import subprocess
 from pathlib import Path
 from typing import Iterable
+from typing import Literal
 
 import frmb
 
@@ -99,3 +100,36 @@ def generate_reg_from_hierarchy(
             )
 
     return output
+
+
+def get_key_path_for_file_association(
+    target_file_type: Literal["*", "directory", "directory_background", "drive"] | str,
+    user_only: bool = True,
+) -> str:
+    """
+    Return a root registry key path to register a new context menu for the given file type.
+
+    Args:
+        target_file_type:
+            the targeted filesystem object type OR any file extension (prefixed with a dot)
+        user_only: False to "install" for ALL users, True only for the current user.
+
+    Returns:
+         A registry key path ending by ``\\shell``.
+            Example: ``HKEY_CURRENT_USER\\Software\\Classes\\*\\shell``
+    """
+
+    root = "HKEY_CURRENT_USER" if user_only else "HKEY_LOCAL_MACHINE"
+
+    if target_file_type == "*":
+        return f"{root}\\Software\\Classes\\*\\shell"
+    if target_file_type.lower() == "directory":
+        return f"{root}\\Software\\Classes\\Directory\\shell"
+    if target_file_type.lower() == "directory_background":
+        return f"{root}\\Software\\Classes\\Directory\\Background\\shell"
+    if target_file_type.lower() == "drive":
+        return f"{root}\\Software\\Classes\\Drive\\shell"
+    if target_file_type.startswith(".", 0, 1):
+        return f"{root}\\Software\\Classes\\SystemFileAssociations\\{target_file_type}\\shell"
+
+    raise ValueError(f"Unsupported file type {target_file_type}")

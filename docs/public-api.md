@@ -40,11 +40,13 @@ print("```")
 
 ::: frmb.generate_reg_from_hierarchy
 
+::: frmb.get_key_path_for_file_association
+
 ## writing
 
 ::: frmb.write_menu_item_to_file
 
-## objets
+## objects
 
 ::: frmb.FrmbMenuItem
 
