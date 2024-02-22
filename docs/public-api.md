@@ -40,7 +40,11 @@ print("```")
 
 ::: frmb.generate_reg_from_hierarchy
 
+::: frmb.FileAssociationType
+
 ::: frmb.get_key_path_for_file_association
+
+::: frmb.get_file_association_for_key_path
 
 ## writing
 

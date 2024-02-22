@@ -102,8 +102,14 @@ def generate_reg_from_hierarchy(
     return output
 
 
+FileAssociationType = Literal["*", "directory", "directory_background", "drive"] | str
+"""
+types that are considered "file associations" and can be used with function using them.
+"""
+
+
 def get_key_path_for_file_association(
-    target_file_type: Literal["*", "directory", "directory_background", "drive"] | str,
+    target_file_type: FileAssociationType,
     user_only: bool = True,
 ) -> str:
     """
@@ -115,7 +121,7 @@ def get_key_path_for_file_association(
         user_only: False to "install" for ALL users, True only for the current user.
 
     Returns:
-         A registry key path ending by ``\\shell``.
+        A registry key path ending by ``\\shell``.
             Example: ``HKEY_CURRENT_USER\\Software\\Classes\\*\\shell``
     """
 
@@ -133,3 +139,39 @@ def get_key_path_for_file_association(
         return f"{root}\\Software\\Classes\\SystemFileAssociations\\{target_file_type}\\shell"
 
     raise ValueError(f"Unsupported file type {target_file_type}")
+
+
+def get_file_association_for_key_path(
+    key_path: str,
+) -> tuple[FileAssociationType, bool]:
+    """
+    Return a file association corresponding to the given registry path.
+
+    To use with [`get_key_path_for_file_association`][frmb.get_key_path_for_file_association].
+
+    Args:
+        key_path: a Windows registry key path
+
+    Returns:
+         the file association as string, True if the key is applie at user level else False
+    """
+    user_only = key_path.startswith("HKEY_CURRENT_USER")
+    intermediate_path = key_path.split("\\", 1)[-1]
+
+    if not intermediate_path.startswith("Software\\Classes"):
+        raise ValueError(f"Unsupported key root {key_path}")
+
+    intermediate_path = intermediate_path.split("\\", 2)[-1]
+
+    if intermediate_path.startswith("*\\"):
+        return "*", user_only
+    if intermediate_path.startswith("Directory\\Background"):
+        return "directory_background", user_only
+    if intermediate_path.startswith("Directory\\"):
+        return "directory", user_only
+    if intermediate_path.startswith("Drive\\"):
+        return "drive", user_only
+    if intermediate_path.startswith("SystemFileAssociations\\."):
+        return intermediate_path.split("\\")[1], user_only
+
+    raise ValueError(f"Unknown key path {key_path}")

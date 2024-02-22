@@ -3,6 +3,7 @@ import pytest
 from frmb import read_menu_hierarchy
 from frmb._windows import generate_reg_from_hierarchy
 from frmb._windows import get_key_path_for_file_association
+from frmb._windows import get_file_association_for_key_path
 
 
 def test__generate_reg_from_hierarchy(data_dir):
@@ -63,4 +64,48 @@ def test__get_key_path_for_file_association():
 
     expected = "HKEY_LOCAL_MACHINE\\Software\\Classes\\Directory\\Background\\shell"
     result = get_key_path_for_file_association("directory_background", False)
+    assert result == expected
+
+
+def test__get_file_association_for_key_path():
+    source = "HKEY_CURRENT_USER\\Software\\Classes\\*\\shell"
+    expected = ("*", True)
+    result = get_file_association_for_key_path(source)
+    assert result == expected
+
+    source = "HKEY_LOCAL_MACHINE\\Software\\Classes\\*\\shell"
+    expected = ("*", False)
+    result = get_file_association_for_key_path(source)
+    assert result == expected
+
+    source = "HKEY_LOCAL_MACHINE\\Software\\Classes\\Directory\\shell"
+    expected = ("directory", False)
+    result = get_file_association_for_key_path(source)
+    assert result == expected
+
+    source = (
+        "HKEY_LOCAL_MACHINE\\Software\\Classes\\SystemFileAssociations\\.abc\\shell"
+    )
+    expected = (".abc", False)
+    result = get_file_association_for_key_path(source)
+    assert result == expected
+
+    with pytest.raises(ValueError):
+        source = (
+            "HKEY_LOCAL_MACHINE\\Software\\Classes\\SystemFileAssociations\\abc\\shell"
+        )
+        get_file_association_for_key_path(source)
+
+    with pytest.raises(ValueError):
+        source = "HKEY_LOCAL_MACHINE\\Foo\\Classes\\SystemFileAssociations\\.abc\\shell"
+        get_file_association_for_key_path(source)
+
+    source = "HKEY_CURRENT_USER\\Software\\Classes\\Drive\\shell"
+    expected = ("drive", True)
+    result = get_file_association_for_key_path(source)
+    assert result == expected
+
+    source = "HKEY_LOCAL_MACHINE\\Software\\Classes\\Directory\\Background\\shell"
+    expected = ("directory_background", False)
+    result = get_file_association_for_key_path(source)
     assert result == expected
