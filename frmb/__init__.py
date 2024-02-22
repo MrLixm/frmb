@@ -1,17 +1,30 @@
-__version__ = "1.0.1"
+__version__ = "2.0.0"
 
-from ._parsing import FrmbFormat
-from ._parsing import read_hierarchy_from_root
-from ._parsing import validate_entry_hierarchy
+from ._menu import FrmbMenuItem
+from ._read import FrmbFile
+from ._read import read_menu_hierarchy_as_file
+from ._read import read_menu_hierarchy
+from ._read import validate_menu_hierarchy
+from ._write import write_menu_item_to_file
+from ._write import delete_menu_file
 from ._windows import generate_reg_from_hierarchy
+from ._windows import get_key_path_for_file_association
+from ._windows import get_file_association_for_key_path
+from ._windows import FileAssociationType
 from ._cli import CLI
 from .__main__ import execute_cli
 
 __all__ = [
-    "FrmbFormat",
-    "read_hierarchy_from_root",
-    "validate_entry_hierarchy",
+    "FrmbMenuItem",
+    "FrmbFile",
+    "read_menu_hierarchy_as_file",
+    "read_menu_hierarchy",
+    "validate_menu_hierarchy",
     "generate_reg_from_hierarchy",
+    "get_key_path_for_file_association",
+    "get_file_association_for_key_path",
+    "FileAssociationType",
     "CLI",
     "execute_cli",
+    "write_menu_item_to_file",
 ]

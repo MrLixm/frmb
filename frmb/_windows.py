@@ -2,6 +2,7 @@ import logging
 import subprocess
 from pathlib import Path
 from typing import Iterable
+from typing import Literal
 
 import frmb
 
@@ -17,7 +18,7 @@ def escape_windows_command(command: Iterable[str]) -> str:
 
 
 def _generate_reg_from_entry(
-    entry: frmb.FrmbFormat,
+    entry: frmb.FrmbMenuItem,
     parent_path: str,
     add_keys: bool = True,
 ) -> list[str]:
@@ -59,7 +60,7 @@ def _generate_reg_from_entry(
 
 
 def generate_reg_from_hierarchy(
-    hierachy: list[frmb.FrmbFormat],
+    hierachy: list[frmb.FrmbMenuItem],
     header_comments: list[str] | None = None,
     add_keys: bool = True,
 ) -> list[str]:
@@ -99,3 +100,78 @@ def generate_reg_from_hierarchy(
             )
 
     return output
+
+
+FileAssociationType = Literal["*", "directory", "directory_background", "drive"] | str
+"""
+types that are considered "file associations" and can be used with function using them.
+"""
+
+
+def get_key_path_for_file_association(
+    target_file_type: FileAssociationType,
+    user_only: bool = True,
+) -> str:
+    """
+    Return a root registry key path to register a new context menu for the given file type.
+
+    Args:
+        target_file_type:
+            the targeted filesystem object type OR any file extension (prefixed with a dot)
+        user_only: False to "install" for ALL users, True only for the current user.
+
+    Returns:
+        A registry key path ending by ``\\shell``.
+            Example: ``HKEY_CURRENT_USER\\Software\\Classes\\*\\shell``
+    """
+
+    root = "HKEY_CURRENT_USER" if user_only else "HKEY_LOCAL_MACHINE"
+
+    if target_file_type == "*":
+        return f"{root}\\Software\\Classes\\*\\shell"
+    if target_file_type.lower() == "directory":
+        return f"{root}\\Software\\Classes\\Directory\\shell"
+    if target_file_type.lower() == "directory_background":
+        return f"{root}\\Software\\Classes\\Directory\\Background\\shell"
+    if target_file_type.lower() == "drive":
+        return f"{root}\\Software\\Classes\\Drive\\shell"
+    if target_file_type.startswith(".", 0, 1):
+        return f"{root}\\Software\\Classes\\SystemFileAssociations\\{target_file_type}\\shell"
+
+    raise ValueError(f"Unsupported file type {target_file_type}")
+
+
+def get_file_association_for_key_path(
+    key_path: str,
+) -> tuple[FileAssociationType, bool]:
+    """
+    Return a file association corresponding to the given registry path.
+
+    To use with [`get_key_path_for_file_association`][frmb.get_key_path_for_file_association].
+
+    Args:
+        key_path: a Windows registry key path
+
+    Returns:
+         the file association as string, True if the key is applie at user level else False
+    """
+    user_only = key_path.startswith("HKEY_CURRENT_USER")
+    intermediate_path = key_path.split("\\", 1)[-1]
+
+    if not intermediate_path.startswith("Software\\Classes"):
+        raise ValueError(f"Unsupported key root {key_path}")
+
+    intermediate_path = intermediate_path.split("\\", 2)[-1]
+
+    if intermediate_path.startswith("*\\"):
+        return "*", user_only
+    if intermediate_path.startswith("Directory\\Background"):
+        return "directory_background", user_only
+    if intermediate_path.startswith("Directory\\"):
+        return "directory", user_only
+    if intermediate_path.startswith("Drive\\"):
+        return "drive", user_only
+    if intermediate_path.startswith("SystemFileAssociations\\."):
+        return intermediate_path.split("\\")[1], user_only
+
+    raise ValueError(f"Unknown key path {key_path}")

@@ -17,6 +17,14 @@ theme:
     - content.code.annotate
     - content.code.copy
 
+nav:
+  - index.md
+  - usage.md
+  - public-api.md
+  - changelog.md
+  - contributing.md
+
+
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -45,7 +53,7 @@ plugins:
 
             inherited_members: true
 
-            heading_level: 2
+            heading_level: 3
             show_root_heading: true
             show_root_full_path: false
             show_symbol_type_heading: true
